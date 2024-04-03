@@ -137,11 +137,24 @@ const allPatients = asyncHandler(async(req,res) => {
     return res.status(200).json({success:true,message:"Patients Retrived Successfully",data:users});
 });
 
+//@desc Get all Patients
+//@route GET /api/users/current
+//@access private
+const currentUser = asyncHandler(async(req,res) => {
+    const id = req.user.id;
+    const user = await User.findById(id);
+    if(!user){
+        return res.status(404).json({success:false,message:"User Not Found!"});
+    }
+    return res.status(200).json({success:true,message:"User Retrived Successfully",data:user});
+});
+
 module.exports = {
     registerUser,
     loginUser,
     updateUser,
     deleteUser,
     allPharmacists,
-    allPatients
+    allPatients,
+    currentUser
 }
