@@ -8,8 +8,8 @@ const User = require("../models/user");
 //@access public
 const registerUser = asyncHandler(async (req, res) => {
     const { firstName, lastName, address, nic, contactNo, email, username, password, role } = req.body;
-    if (!firstName || !lastName || !address || !nic || !contactNo || !email || !username || !password) {
-        return res.status(400).json({message:"All fields are mandatory!"});
+    if (!firstName || !lastName || !dob || !address || !nic || !contactNo || !email || !username || !password) {
+        return res.status(400).json({success:false,message:"All fields are mandatory!"});
     }
     const userAvailable = await User.findOne({ email });
     if (userAvailable) {
@@ -20,6 +20,7 @@ const registerUser = asyncHandler(async (req, res) => {
     const user = await User.create({
         firstName,
         lastName,
+        dob,
         address,
         nic,
         contactNo,
