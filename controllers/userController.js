@@ -1,4 +1,4 @@
-const bcrypt = require("bcryptjs")
+const bcrypt = require("bcryptjs");
 const asyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 const User = require("../models/user");
@@ -92,7 +92,7 @@ const updateUser = asyncHandler(async (req,res)=>{
         return res.status(404).json({success:false,message:`User not found with ${id}`});
     }
     if(user.id.toString() !== req.user.id){
-        return res.status(403).json({success:false,message:"User don't have permission to update other users"})
+        return res.status(403).json({success:false,message:"User don't have permission to update other users"});
     }
     const updatedUser = await User.findByIdAndUpdate(
         id,
@@ -112,7 +112,7 @@ const deleteUser = asyncHandler(async (req, res) => {
         return res.status(404).json({message:"User not found"});
     }
     await User.deleteOne({_id: id});
-    return res.status(200).json({message:"User deleted successfully", data:user})
+    return res.status(200).json({message:"User deleted successfully", data:user});
 });
 
 //@desc Get all Pharmacists
