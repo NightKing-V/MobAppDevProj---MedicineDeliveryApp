@@ -5,8 +5,8 @@ const validateToken = asyncHandler(async (req, res, next) => {
   let token;
   let authHeader = req.headers.Authorization || req.headers.authorization;
   if (authHeader && authHeader.startsWith("Bearer")) {
-    token = authHeader.split(' ')[1];
-    console.log(token)
+    token = authHeader.split(" ")[1];
+    console.log(token);
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
       if (err) {
         res.status(401);
@@ -20,10 +20,11 @@ const validateToken = asyncHandler(async (req, res, next) => {
       res.status(401);
       throw new Error("User is not authorized or token is missing");
     }
-  }else{
-    res.status(401).json({messsage:"User not authorized please provide accessToken"});
+  } else {
+    res
+      .status(401)
+      .json({ messsage: "User not authorized please provide accessToken" });
   }
-}
-);
+});
 
 module.exports = validateToken;
