@@ -52,7 +52,7 @@ const registerPharmacy = asyncHandler(async (req,res)=>{
 });
 
 //@desc update a pharmacy
-//@route /api/pharmacy/update/:id
+//@route POST /api/pharmacy/update/:id
 //@access private
 const updatePharmacy = asyncHandler(async (req, res) => {
     const updates = req.body;
@@ -72,7 +72,7 @@ const updatePharmacy = asyncHandler(async (req, res) => {
 });
 
 //@desc delete a pharmacy
-//@route /api/pharmacy/delete/:id
+//@route DELETE /api/pharmacy/delete/:id
 //@access private
 const deletePharmacy = asyncHandler(async (req, res) => {
     const pharmacy = await Pharmacy.findById(req.params.id);
@@ -85,7 +85,7 @@ const deletePharmacy = asyncHandler(async (req, res) => {
 })
 
 //@desc get a pharmacy by id
-//@route /aspi/pharmacy/get/
+//@route GET /api/pharmacy/get/
 //@access private
 const getAllPharmacies = asyncHandler(async(req,res)=>{
     const pharmacies = Pharmacy.find();
@@ -96,7 +96,7 @@ const getAllPharmacies = asyncHandler(async(req,res)=>{
 });
 
 //@desc get a pharmacy by id
-//@route /aspi/pharmacy/get/:id
+//@route GET /api/pharmacy/get/:id
 //@access private
 const getPharmacyById = asyncHandler(async(req,res)=>{
     const id = req.params.id;
