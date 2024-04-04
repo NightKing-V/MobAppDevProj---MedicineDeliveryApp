@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const productSchema = new Schema({
+const purchaseHistorySchema = new Schema({
     userID:{
         type: mongoose.Schema.Types.ObjectId, 
         ref: 'User', 
@@ -14,4 +14,4 @@ const productSchema = new Schema({
     }
 },{ timestamps: true , versionKey: false});
 
-module.exports = mongoose.model('PurchaseHistory', productSchema);
+module.exports = mongoose.model('PurchaseHistory', purchaseHistorySchema);
