@@ -46,7 +46,7 @@ const addProduct = asyncHandler(async(req,res)=>{
 });
 
 //@desc update a product
-//@route POST /api/product/update/:id
+//@route PUT /api/product/update/:id
 //@access private
 const updateProduct = asyncHandler(async (req, res) => {
     const updates = req.body;
@@ -57,7 +57,6 @@ const updateProduct = asyncHandler(async (req, res) => {
         .json({ success: false, message: "Product not found." });
     }
   
-    // Update each field with new values, if provided in the request
     for (let key in updates) {
       product[key] = updates[key];
     }
