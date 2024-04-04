@@ -123,7 +123,7 @@ const deletePharmacy = asyncHandler(async (req, res) => {
     .json({ success: true, message: "Pharmacy deleted successfully." });
 });
 
-//@desc get a pharmacy by id
+//@desc get all pharmacies
 //@route GET /api/pharmacy/get/
 //@access private
 const getAllPharmacies = asyncHandler(async (req, res) => {
@@ -147,7 +147,7 @@ const getPharmacyById = asyncHandler(async (req, res) => {
   if (!pharmacy) {
     return res
       .status(404)
-      .json({ sucess: false, message: `No pharmacy foind for ${id}` });
+      .json({ sucess: false, message: `No pharmacy found for ${id}` });
   }
   return res
     .status(200)
