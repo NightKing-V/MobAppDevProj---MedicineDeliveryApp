@@ -93,12 +93,12 @@ const updateProduct = asyncHandler(async (req, res) => {
   //@route GET /api/product/get/
   //@access private
   const getAllProducts = asyncHandler(async (req, res) => {    /// by pharmacy
-    const usrID = req.user.id;
-    const pharmacy = await Pharmacy.findOne({ownerID:usrID});
-    if(!pharmacy){
-      return res.status(400).json({success:false,message:"forbidden!"});
-    }
-    const products = Product.find({pharmacyID:pharmacy._id});
+    // const usrID = req.user.id;
+    // const pharmacy = await Pharmacy.findOne({ownerID:usrID});
+    // if(!pharmacy){
+    //   return res.status(400).json({success:false,message:"forbidden!"});
+    // }
+    const products = Product.find({pharmacyID:user.pharmacyID});
     if (!products) {
       return res
         .status(404)

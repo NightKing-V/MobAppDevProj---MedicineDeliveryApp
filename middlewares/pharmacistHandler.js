@@ -3,7 +3,7 @@ const pharmacy = require("../models/pharmacy");
 
 const validatePharmaisist = asyncHandler(async (req, res, next) => {
       const userID = req.user.id;
-      const pharmacy = await pharmacy.findOne();
+      const pharmacy = await pharmacy.findOne({ownerID:userID});
       if(!pharmacy){
         return res.status(403).json({message:"not a pharmacist"});
       }
