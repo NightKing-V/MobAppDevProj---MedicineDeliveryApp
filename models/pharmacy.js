@@ -46,6 +46,11 @@ const pharmacySchema = new Schema(
       type: String,
       required: true,
     },
+    ownerID:{
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: 'User', 
+      required: true
+    },
     licenseNumber: {
       type: String,
       required: true,

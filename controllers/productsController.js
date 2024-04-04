@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Product = require("../models/product");
+const Pharmacy = require("../models/pharmacy");
 
 //@desc add a product
 //@route POST /api/product/add/
@@ -88,11 +89,16 @@ const updateProduct = asyncHandler(async (req, res) => {
       .json({ success: true, message: "Product deleted successfully." });
   });
   
-  //@desc get all products
+  //@desc get all products by pharmacy
   //@route GET /api/product/get/
   //@access private
-  const getAllProducts = asyncHandler(async (req, res) => {
-    const products = Product.find();
+  const getAllProducts = asyncHandler(async (req, res) => {    /// by pharmacy
+    const usrID = req.user.id;
+    const pharmacy = await Pharmacy.findOne({ownerID:usrID});
+    if(!pharmacy){
+      return res.status(400).json({success:false,message:"forbidden!"});
+    }
+    const products = Product.find({pharmacyID:pharmacy._id});
     if (!products) {
       return res
         .status(404)

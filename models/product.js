@@ -46,7 +46,12 @@ const productSchema = new Schema({
   },
   images: [{ // URLs to images of the product
     type: String
-  }]
+  }],
+  pharmacyID:{
+    type: mongoose.Schema.Types.ObjectId, 
+      ref: 'Pharmacy', 
+      required: true
+  }
 }, { timestamps: true , versionKey: false});
 
 module.exports = mongoose.model('Product', productSchema);
