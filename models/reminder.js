@@ -19,6 +19,6 @@ const reminderSchema = new Schema({
      ref: 'User',
     required:true,
   }
-}, { timestamps: true });
+}, { timestamps: true , versionKey: false});
 
 module.exports = mongoose.model('Reminder', reminderSchema);

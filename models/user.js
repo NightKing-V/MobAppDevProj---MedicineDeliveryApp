@@ -75,7 +75,7 @@ const userSchema = new Schema({
         enum: ['patient', 'pharmacist','admin'],
         default: 'patient'
     },
-}, { timestamps: true });
+}, { timestamps: true , versionKey: false});
 
 
 module.exports = mongoose.model('User', userSchema);

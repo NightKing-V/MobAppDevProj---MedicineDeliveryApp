@@ -47,6 +47,6 @@ const productSchema = new Schema({
   images: [{ // URLs to images of the product
     type: String
   }]
-}, { timestamps: true });
+}, { timestamps: true , versionKey: false});
 
 module.exports = mongoose.model('Product', productSchema);
