@@ -108,6 +108,21 @@ const updateProduct = asyncHandler(async (req, res) => {
       .status(200)
       .json({ success: true, message: "Products retrived successfully!" });
   });
+
+  //@desc get all products
+  //@route GET /api/product/total/
+  //@access private
+  const getTotalProducts = asyncHandler(async (req, res) => {   
+    const products = Product.find({});
+    if (!products) {
+      return res
+        .status(404)
+        .json({ success: false, message: "No products found!" });
+    }
+    return res
+      .status(200)
+      .json({ success: true, message: "Products retrived successfully!" });
+  });
   
   //@desc get a product by id
   //@route GET /api/product/get/:id
@@ -130,5 +145,6 @@ const updateProduct = asyncHandler(async (req, res) => {
     updateProduct,
     deleteProduct,
     getAllProducts,
-    getProductById
+    getProductById,
+    getTotalProducts
   }
