@@ -6,6 +6,7 @@ const Pharmacy = require("../models/pharmacy");
 //@route POST /api/product/add/
 //@access private
 const addProduct = asyncHandler(async(req,res)=>{
+  const imagePath = req.file.path;
     const {
         name,
         description,
@@ -16,7 +17,6 @@ const addProduct = asyncHandler(async(req,res)=>{
         activeIngredients, // Optional
         manufacturer, // Optional
         expiryDate, // Optional
-        images // Optional
     } = req.body;
     const requiredFiels = ["name","description","category","stockQuantity"];
     const missingFields = requiredFiels.filter(field => !req.body[field]);
@@ -36,7 +36,7 @@ const addProduct = asyncHandler(async(req,res)=>{
             activeIngredients,
             manufacturer,
             expiryDate,
-            images
+            images:imagePath
         });
 
         res.status(201).json({success:true,message:"Product added successfully!",data:newProduct});

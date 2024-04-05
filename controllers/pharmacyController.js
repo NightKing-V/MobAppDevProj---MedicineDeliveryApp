@@ -5,12 +5,12 @@ const Pharmacy = require("../models/pharmacy");
 //@route POST /api/pharmacy/register
 //@access private
 const registerPharmacy = asyncHandler(async (req, res) => {
+  const imagePath = req.file.path;
   const {
     pharmacyName,
     description,
     address: { street, city, state, zipCode },
     geoLocation: { lat, lng },
-    images,
     owner,
     licenseNumber,
     delivery,
@@ -25,7 +25,7 @@ const registerPharmacy = asyncHandler(async (req, res) => {
     !zipCode ||
     !lat ||
     !lng ||
-    !images ||
+    !imagePath ||
     !owner ||
     !licenseNumber ||
     delivery === undefined
@@ -57,7 +57,7 @@ const registerPharmacy = asyncHandler(async (req, res) => {
       lat,
       lng,
     },
-    images,
+    images:imagePath,
     owner,
     licenseNumber,
     delivery,
