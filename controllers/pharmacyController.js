@@ -5,12 +5,26 @@ const Pharmacy = require("../models/pharmacy");
 //@route POST /api/pharmacy/register
 //@access private
 const registerPharmacy = asyncHandler(async (req, res) => {
-  const imagePath = req.file.path;
+
+  const imagePath = req.file ? req.file.path : undefined;
+  if(req.user.role != "pharmacist"){
+    return res.status(403).json({success:false,message:"not a pharmacist"});
+  }
+
+  let address, geoLocation;
+  try {
+    address = JSON.parse(req.body.address);
+    geoLocation = JSON.parse(req.body.geoLocation);
+  } catch (e) {
+    return res.status(400).json({ success: false, message: "Invalid address or geoLocation format." });
+  }
+
+  const { street, city, state, zipCode } = address;
+  const { lat, lng } = geoLocation;
+
   const {
     pharmacyName,
     description,
-    address: { street, city, state, zipCode },
-    geoLocation: { lat, lng },
     owner,
     licenseNumber,
     delivery,
@@ -28,12 +42,13 @@ const registerPharmacy = asyncHandler(async (req, res) => {
     !imagePath ||
     !owner ||
     !licenseNumber ||
-    delivery === undefined
+    !delivery 
   ) {
     return res
       .status(400)
       .json({ success: false, message: "Please provide all required fields." });
   }
+  
   const existingPharmacy = await Pharmacy.findOne({ licenseNumber });
   if (existingPharmacy) {
     return res
@@ -43,40 +58,32 @@ const registerPharmacy = asyncHandler(async (req, res) => {
         message: "Pharmacy with this license number already exists.",
       });
   }
-
-  const pharmacy = await Pharmacy.create({
+  
+  // Create pharmacy
+  const newPharmacy = new Pharmacy({
     pharmacyName,
     description,
-    address: {
-      street,
-      city,
-      state,
-      zipCode,
-    },
-    geoLocation: {
-      lat,
-      lng,
-    },
-    images:imagePath,
+    address: { street, city, state, zipCode },
+    geoLocation: { lat, lng },
+    images: [imagePath],
     owner,
+    ownerID: req.user.id,
     licenseNumber,
     delivery,
   });
-
-  if (pharmacy) {
-    res
-      .status(201)
-      .json({
-        success: true,
-        message: "Pharmacy created successfully",
-        data: pharmacy,
-      });
-  } else {
-    res
-      .status(400)
-      .json({ success: false, message: "Failed to create the pharmacy." });
+  
+  try {
+    var savedPharmacy = await newPharmacy.save();
+    savedPharmacy.images = savedPharmacy.images.map(image=>{
+      const encodedPath = image.split('\\').map(encodeURIComponent).join('/');
+      return process.env.FILE_HOST + encodedPath;
+    } ) 
+    res.status(201).json({ success: true, data: savedPharmacy });
+  } catch (error) {
+    res.status(400).json({ success: false, message: error.message });
   }
 });
+
 
 //@desc update a pharmacy
 //@route POST /api/pharmacy/update/:id

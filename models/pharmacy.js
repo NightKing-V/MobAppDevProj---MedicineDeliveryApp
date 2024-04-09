@@ -54,13 +54,14 @@ const pharmacySchema = new Schema(
     licenseNumber: {
       type: String,
       required: true,
+      index: true,
     },
     delivery: {
-      type: Boolean,
+      type: String,
       required: true,
     },
   },
-  { timestamps: true }
+  { timestamps: true, versionKey:false }
 );
 
 module.exports = mongoose.model("Pharmacy", pharmacySchema);
