@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:medicinedeliveryapp/models/authModel.dart';
+import 'package:medicinedeliveryapp/models/config.dart';
 
 class LoginResult {
   final bool success;
@@ -18,10 +19,9 @@ class LoginResult {
   });
 }
 
-
 Future<LoginResult> loginAndGetAccessToken(
     BuildContext context, String username, String password) async {
-  const String apiUrl = 'http://192.168.1.3:3000/api/users/login';
+    String apiUrl = API.API_URL + '/users/login';
 
   try {
     final response = await http.post(
@@ -39,7 +39,7 @@ Future<LoginResult> loginAndGetAccessToken(
       final responseData = jsonDecode(response.body);
       final String accessToken = responseData['accessToken'];
       final String role = responseData['role'];
-      
+
       // Store the accessToken using Provider
       Provider.of<AuthModel>(context, listen: false).setToken(accessToken);
 

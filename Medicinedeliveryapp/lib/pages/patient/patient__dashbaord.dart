@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:medicinedeliveryapp/models/authModel.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -68,6 +70,7 @@ class HomePage extends StatelessWidget {
                   ),
                 ],
               ),
+              Text(Provider.of<AuthModel>(context).accessToken),  //access token
               // Add more widgets as needed
               // For example, you can add more Text, Image, or other widgets here
             ],

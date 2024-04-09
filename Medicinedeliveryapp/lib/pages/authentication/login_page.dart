@@ -141,10 +141,6 @@ class _LoginPageState extends State<LoginPage>
                         usernameController.clear();
                         passwordController.clear();
                       }
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(builder: (context) => HomePage()),
-                      // );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: customColor,
