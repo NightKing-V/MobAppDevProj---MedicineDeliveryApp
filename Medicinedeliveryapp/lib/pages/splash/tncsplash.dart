@@ -1,13 +1,13 @@
 //import 'dart:async';
 import 'package:flutter/material.dart';
-import 'signup.dart';
+import '../others/termsandcondition.dart';
 
-class SplashScreenSignUp extends StatefulWidget {
+class tncsplash extends StatefulWidget {
   @override
-  _SplashScreenSignUpState createState() => _SplashScreenSignUpState();
+  _tncsplashState createState() => _tncsplashState();
 }
 
-class _SplashScreenSignUpState extends State<SplashScreenSignUp>
+class _tncsplashState extends State<tncsplash>
     with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _rotationAnimation;
@@ -33,7 +33,7 @@ class _SplashScreenSignUpState extends State<SplashScreenSignUp>
       if (status == AnimationStatus.completed) {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => SignUpPage()),
+          MaterialPageRoute(builder: (context) => TermsAndConditionsPage()),
         );
       }
     });

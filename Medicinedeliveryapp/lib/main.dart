@@ -1,8 +1,13 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'loginpage.dart';
+import 'pages/authentication/login_page.dart';
+import 'package:provider/provider.dart';
+import 'package:medicinedeliveryapp/models/authModel.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(ChangeNotifierProvider(
+      create: (context) => AuthModel(),
+      child: MyApp(),
+      ));
 
 class MyApp extends StatelessWidget {
   @override
@@ -25,7 +30,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void initState() {
     super.initState();
     // After 8 seconds, navigate to the login page
-    Timer(Duration(seconds: 8), () {
+    Timer(Duration(seconds: 1), () {
       setState(() {
         loadingIndicator = false;
       });

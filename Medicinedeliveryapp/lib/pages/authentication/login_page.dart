@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'logsignsplash.dart';
+import 'package:medicinedeliveryapp/pages/patient/patient__dashbaord.dart';
+import '../splash/logsignsplash.dart';
+import 'package:medicinedeliveryapp/controllers/loginController.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -16,7 +18,7 @@ class _LoginPageState extends State<LoginPage>
     super.initState();
 
     _controller = AnimationController(
-      duration: Duration(seconds: 3),
+      duration: Duration(seconds: 1),
       vsync: this,
     );
 
@@ -36,6 +38,9 @@ class _LoginPageState extends State<LoginPage>
   Widget build(BuildContext context) {
     // Define the custom color
     Color customColor = Color.fromARGB(255, 25, 154, 142);
+    // Define a TextEditingController
+    final TextEditingController usernameController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
       body: Center(
@@ -63,8 +68,9 @@ class _LoginPageState extends State<LoginPage>
                   SizedBox(height: 40.0),
                   // Email Textbox
                   TextField(
+                    controller: usernameController,
                     decoration: InputDecoration(
-                      labelText: 'Email',
+                      labelText: 'Username',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -74,6 +80,7 @@ class _LoginPageState extends State<LoginPage>
                   // Password Textbox with visibility toggle
                   TextField(
                     obscureText: true,
+                    controller: passwordController,
                     decoration: InputDecoration(
                       labelText: 'Password',
                       border: OutlineInputBorder(
@@ -110,8 +117,34 @@ class _LoginPageState extends State<LoginPage>
                   SizedBox(height: 16.0),
                   // Login Button with corner radius and custom color
                   ElevatedButton(
-                    onPressed: () {
-                      // Implement login logic
+                    onPressed: () async {
+                      LoginResult result = await loginAndGetAccessToken(context,
+                          usernameController.text, passwordController.text);
+
+                      if (result.success) {
+                        print(
+                            'Login successful, role: ${result.role}, accessToken: ${result.accessToken}');
+                        if (result.role == "patient") {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        }
+                      } else {
+                        print('Login failed, error: ${result.errorMessage}');
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text('Invalid data. Please try again.'),
+                            duration: Duration(seconds: 3),
+                          ),
+                        );
+                        usernameController.clear();
+                        passwordController.clear();
+                      }
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => HomePage()),
+                      // );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: customColor,

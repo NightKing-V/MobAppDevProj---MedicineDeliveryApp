@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'tncsplash.dart';
+import '../splash/tncsplash.dart';
 
 class SignUpPage extends StatefulWidget {
   @override

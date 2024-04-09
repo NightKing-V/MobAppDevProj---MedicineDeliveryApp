@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.6
   #cupertino_datetime_picker: ^1.0.1
   cupertino_date_textbox: ^1.0.0
+  http: ^1.2.1
+  provider: ^6.1.2
   #cupertino_picker: ^1.0.3
 
 dev_dependencies:
