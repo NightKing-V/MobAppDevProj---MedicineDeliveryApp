@@ -29,12 +29,14 @@ const productSchema = new Schema({
   },
   dosageForm: {
     type: String, // E.g., tablet, capsule, liquid, topical, etc.
-    required: false
+    required: false,
+    default:'N/A'
   },
-  activeIngredients: [{ // For products with multiple active ingredients
-    name: String,
-    strength: String // E.g., "500 mg"
-  }],
+  activeIngredient: { // For products with multiple active ingredients
+    type: String,
+    required:false,
+    default:'N/A'
+  },
   manufacturer: {
     type: String,
     required: false,

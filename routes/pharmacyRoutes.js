@@ -1,5 +1,5 @@
 const express = require("express");
-const { registerPharmacy } = require("../controllers/pharmacyController");
+const { registerPharmacy, getAllPharmacies, getPharmacyById } = require("../controllers/pharmacyController");
 const { PhrmacyimageUpload } = require("../configs/uploadConfig");
 const validatePharmaisist = require("../middlewares/pharmacistHandler");
 const validateToken = require("../middlewares/validateTokenHandler");
@@ -12,5 +12,7 @@ router.post(
   PhrmacyimageUpload.single("image"),
   registerPharmacy
 );
+router.get('/all',validateToken,getAllPharmacies);
+router.get('/:id',validateToken,getPharmacyById);
 
 module.exports = router;

@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler");
 const Pharmacy = require("../models/pharmacy");
+const mongoose = require('mongoose');
 
 //@desc Register a pharmacy
 //@route POST /api/pharmacy/register
@@ -48,7 +49,7 @@ const registerPharmacy = asyncHandler(async (req, res) => {
       .status(400)
       .json({ success: false, message: "Please provide all required fields." });
   }
-  
+
   const existingPharmacy = await Pharmacy.findOne({ licenseNumber });
   if (existingPharmacy) {
     return res
@@ -134,7 +135,7 @@ const deletePharmacy = asyncHandler(async (req, res) => {
 //@route GET /api/pharmacy/get/
 //@access private
 const getAllPharmacies = asyncHandler(async (req, res) => {
-  const pharmacies = Pharmacy.find();
+  const pharmacies = await Pharmacy.find();
   if (!pharmacies) {
     return res
       .status(404)
@@ -142,7 +143,7 @@ const getAllPharmacies = asyncHandler(async (req, res) => {
   }
   return res
     .status(200)
-    .json({ success: true, message: "Pharmacies retrived successfully!" });
+    .json({ success: true, message: "Pharmacies retrived successfully!", data:pharmacies });
 });
 
 //@desc get a pharmacy by id
@@ -150,7 +151,10 @@ const getAllPharmacies = asyncHandler(async (req, res) => {
 //@access private
 const getPharmacyById = asyncHandler(async (req, res) => {
   const id = req.params.id;
-  const pharmacy = Pharmacy.findOne({ _id: id });
+  if (!mongoose.isValidObjectId(id)) {
+    return res.status(400).json({ success: false, message: `Invalid ID` });
+  }
+  const pharmacy = await Pharmacy.findOne({ _id: id });
   if (!pharmacy) {
     return res
       .status(404)
