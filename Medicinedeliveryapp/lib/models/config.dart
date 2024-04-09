@@ -1,3 +1,3 @@
 class API {
-  static const String API_URL = "http://192.168.1.3:3000/api";
+  static const String API_URL = "http://192.168.8.141:3000/api";
 }
