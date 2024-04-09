@@ -7,7 +7,7 @@ const User = require("../models/user");
 //@route POST /api/users/register
 //@access public
 const registerUser = asyncHandler(async (req, res) => {
-    const { firstName, lastName, address, nic, contactNo, email, username, password, role } = req.body;
+    const { firstName, lastName, dob, address, nic, contactNo, email, username, password, role } = req.body;
     if (!firstName || !lastName || !dob || !address || !nic || !contactNo || !email || !username || !password) {
         return res.status(400).json({success:false,message:"All fields are mandatory!"});
     }
@@ -75,6 +75,7 @@ const loginUser = asyncHandler(async (req, res) => {
             success: true,
             id: user.id,
             username: user.username,
+            role: user.role,
             accessToken: accessToken
         });
     } catch (error) {
@@ -87,7 +88,7 @@ const loginUser = asyncHandler(async (req, res) => {
 //@route PUT /api/users/update
 //@access private
 const updateUser = asyncHandler(async (req,res)=>{
-    const id = req.params.id;
+    const id = req.user.id;
     const user = await User.findById(id);
     if(!user){
         return res.status(404).json({success:false,message:`User not found with ${id}`});
@@ -107,7 +108,7 @@ const updateUser = asyncHandler(async (req,res)=>{
 //@route DELETE /api/users/delete
 //@access private
 const deleteUser = asyncHandler(async (req, res) => {
-    const id = req.params.id
+    const id = req.user.id
     const user = await User.findById(id);
     if(!user){
         return res.status(404).json({message:"User not found"});

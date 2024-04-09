@@ -7,16 +7,15 @@ const PharmacyimageStorage = multer.diskStorage({
     filename: (req, file, cb) => {
         cb(null, file.fieldname + '_' + Date.now() 
            + path.extname(file.originalname));
-        // file.fieldname is name of the field (image), path.extname gets the uploaded file extension
     }
 });
+
 const ProductimageStorage = multer.diskStorage({
     // Destination to store image     
     destination: 'uploads/Product/', 
     filename: (req, file, cb) => {
         cb(null, file.fieldname + '_' + Date.now() 
            + path.extname(file.originalname));
-        // file.fieldname is name of the field (image), path.extname gets the uploaded file extension
     }
 });
 
