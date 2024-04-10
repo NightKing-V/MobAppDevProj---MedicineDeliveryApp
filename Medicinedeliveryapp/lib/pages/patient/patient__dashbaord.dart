@@ -152,7 +152,7 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => Itemsdesc('Sample Title',
-                                  'This is a description.', '19.99'),),
+                                  'This is a description.', '19.99', 'assets/product1.jpg'),),
                         ); // danata mekata damme
                       },
                       borderRadius: BorderRadius.circular(
@@ -169,7 +169,7 @@ class HomePage extends StatelessWidget {
                             context,
                             MaterialPageRoute(
                               builder: (context) => Itemsdesc('Sample Title',
-                                  'This is a description.', '19.99'),
+                                  'This is a description.', '19.99', ''),
                             )); // danata mekata damme
                       },
                       borderRadius: BorderRadius.circular(
@@ -185,7 +185,7 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => Itemsdesc('Sample Title',
-                                  'This is a description.', '19.99'),),
+                                  'This is a description.', '19.99', ''),),
                         ); // danata mekata damme
                       },
                       borderRadius: BorderRadius.circular(
@@ -201,7 +201,7 @@ class HomePage extends StatelessWidget {
                         Navigator.push(
                           context,
                           MaterialPageRoute(builder: (context) => Itemsdesc('Sample Title',
-                                  'This is a description.', '19.99'),),
+                                  'This is a description.', '19.99', ''),),
                         ); // danata mekata damme
                       },
                       borderRadius: BorderRadius.circular(
