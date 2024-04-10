@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Itemsdesc extends StatelessWidget {
+  final String title, desc, price;
+  const Itemsdesc(this.title, this.desc, this.price);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
