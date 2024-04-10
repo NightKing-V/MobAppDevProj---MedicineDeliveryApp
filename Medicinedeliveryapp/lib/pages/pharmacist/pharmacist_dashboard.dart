@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/components/card_button.dart';
+import 'package:medicinedeliveryapp/pages/pharmacist/product_deliveries.dart';
 import 'package:medicinedeliveryapp/pages/pharmacist/product_orders.dart';
 import 'package:medicinedeliveryapp/pages/pharmacist/product_store.dart';
 
@@ -118,7 +119,12 @@ class PharmacistDashboard extends StatelessWidget {
                         icon: Icons.local_shipping, // Use Icon widget directly
                         color: Colors.orange,
                         onPressed: () {
-                          // Action for My Deliveries
+                          print("Navigating to PharmacistDashboard");
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyDeliveries()),
+                          );
                         },
                       ),
                     ),
