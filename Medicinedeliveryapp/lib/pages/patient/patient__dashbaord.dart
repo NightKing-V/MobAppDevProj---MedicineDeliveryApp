@@ -151,7 +151,8 @@ class HomePage extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Itemsdesc()),
+                          MaterialPageRoute(builder: (context) => Itemsdesc('Sample Title',
+                                  'This is a description.', '19.99'),),
                         ); // danata mekata damme
                       },
                       borderRadius: BorderRadius.circular(
@@ -165,9 +166,11 @@ class HomePage extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         Navigator.push(
-                          context,
-                          MaterialPageRoute(builder: (context) => Itemsdesc()),
-                        ); // danata mekata damme
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Itemsdesc('Sample Title',
+                                  'This is a description.', '19.99'),
+                            )); // danata mekata damme
                       },
                       borderRadius: BorderRadius.circular(
                           10.0), // Adjust corner radius as needed
@@ -181,7 +184,8 @@ class HomePage extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Itemsdesc()),
+                          MaterialPageRoute(builder: (context) => Itemsdesc('Sample Title',
+                                  'This is a description.', '19.99'),),
                         ); // danata mekata damme
                       },
                       borderRadius: BorderRadius.circular(
@@ -196,7 +200,8 @@ class HomePage extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Itemsdesc()),
+                          MaterialPageRoute(builder: (context) => Itemsdesc('Sample Title',
+                                  'This is a description.', '19.99'),),
                         ); // danata mekata damme
                       },
                       borderRadius: BorderRadius.circular(
@@ -227,7 +232,6 @@ class HomePage extends StatelessWidget {
               onPressed: () {},
             ),
             IconButton(
-<<<<<<< Updated upstream
               icon: const Icon(
                 Icons.medication,
                 color: Color(0xFF199A8E),
@@ -237,16 +241,8 @@ class HomePage extends StatelessWidget {
                   context,
                   MaterialPageRoute(builder: (context) => ProductStore()),
                 );
-
               },
             ),
-=======
-                icon: const Icon(
-                  Icons.library_books_rounded,
-                  color: Color(0xFF199A8E),
-                ),
-                onPressed: () {}),
->>>>>>> Stashed changes
             IconButton(
               icon: const Icon(
                 Icons.settings,

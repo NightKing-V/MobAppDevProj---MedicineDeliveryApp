@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/components/product_card.dart';
 import 'package:medicinedeliveryapp/controllers/productsController.dart';
+import 'package:medicinedeliveryapp/pages/patient/search_product.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,31 +39,26 @@ class _ProductStoreState extends State<ProductStore> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_active_rounded),
-            onPressed: () {},
+            icon: const Icon(
+              Icons.search,
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => SearchProduct(),
+                ),
+              );
+            },
           ),
         ],
         toolbarHeight: kToolbarHeight + 20.0,
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: TextFormField(
-              decoration: InputDecoration(
-                labelText: 'Search',
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(30.0),
-                ),
-                contentPadding:
-                    const EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-                prefixIcon: const Icon(Icons.search),
-              ),
-            ),
-          ),
           Expanded(
             child: FutureBuilder<List<dynamic>>(
-              future: getAllProducts(context),
+              future: getAllProducts(context, null),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
                   final products = snapshot.data!;
@@ -73,7 +69,8 @@ class _ProductStoreState extends State<ProductStore> {
                       return Padding(
                         padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
                         child: ProductCard(
-                          imageUrl: product['images'][0], // Assuming first image in 'images' list
+                          imageUrl: product['images']
+                              [0], // Assuming first image in 'images' list
                           title: product['name'],
                           description: product['description'],
                           price: product['price'].toDouble(),

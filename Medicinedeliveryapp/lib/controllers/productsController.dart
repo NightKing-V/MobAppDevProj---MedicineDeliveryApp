@@ -4,21 +4,30 @@ import 'package:http/http.dart' as http;
 import 'package:medicinedeliveryapp/models/authModel.dart';
 import 'package:medicinedeliveryapp/models/config.dart';
 import 'package:provider/provider.dart';
-
-Future<List<dynamic>> getAllProducts(BuildContext context) async {
+Future<List<dynamic>> getAllProducts(BuildContext context, String? query) async {
   final String apiUrl = API.API_URL + '/products/allProducts';
-  final String accessToken = Provider.of<AuthModel>(context).accessToken;
+  final String accessToken = Provider.of<AuthModel>(context, listen: false).accessToken;
 
   final headers = {
     'Authorization': 'Bearer $accessToken',
   };
 
   final response = await http.get(Uri.parse(apiUrl), headers: headers);
-
   if (response.statusCode == 200) {
-    final List<dynamic> data = jsonDecode(response.body)['data'];
-    // print(data);
-    return data;
+    final List<dynamic> allData = jsonDecode(response.body)['data'];
+
+    // If there's a query, filter the products, otherwise return all products
+    if (query != null && query.isNotEmpty) {
+      final filteredData = allData.where((product) {
+        // Assuming 'title' is a key in your product map. Adjust if necessary.
+        final title = product['name'] as String? ?? '';
+        return title.toLowerCase().contains(query.toLowerCase());
+      }).toList();
+
+      return filteredData;
+    } else {
+      return allData;
+    }
   } else {
     throw Exception('Failed to fetch data');
   }
