@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/components/pharmacy_product_list.dart';
-import 'package:medicinedeliveryapp/controllers/pharmacist_dashboard_controller.dart';
+import 'package:medicinedeliveryapp/controllers/pharmacist_products.dart';
 
 void main() {
   runApp(MyApp());
