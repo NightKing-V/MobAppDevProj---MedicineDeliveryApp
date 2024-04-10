@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/widgets.dart';
+import 'package:medicinedeliveryapp/pages/patient/profile.dart';
+import 'package:medicinedeliveryapp/pages/patient/itemsdesc.dart';
 
 
 void main() {
@@ -190,7 +192,10 @@ class HomePage extends StatelessWidget {
                 color: Color(0xFF199A8E),
               ),
               onPressed: () {
-                // Handle search button press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Itemsdesc()),
+                );// danata mekata damme
               },
             ),
             IconButton(
@@ -199,7 +204,10 @@ class HomePage extends StatelessWidget {
                 color: Color(0xFF199A8E),
               ),
               onPressed: () {
-                // Handle settings button press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Profile()),
+                );// Handle settings button press
               },
             ),
           ],

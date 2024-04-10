@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/components/card_button.dart';
 import 'package:medicinedeliveryapp/pages/pharmacist/product_orders.dart';
 import 'package:medicinedeliveryapp/pages/pharmacist/product_store.dart';
-
+import 'package:medicinedeliveryapp/pages/pharmacist/profile.dart';
 
 void main() {
   runApp(MyApp());
@@ -161,7 +161,10 @@ class PharmacistDashboard extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.settings),
               onPressed: () {
-                // Handle settings button press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Profile()),
+                );
               },
             ),
           ],
