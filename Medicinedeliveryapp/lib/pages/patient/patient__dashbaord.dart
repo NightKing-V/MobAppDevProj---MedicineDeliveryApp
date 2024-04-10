@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+// ignore: unnecessary_import
 import 'package:flutter/widgets.dart';
 
 void main() {
@@ -24,8 +25,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Padding(
-          padding:
-              EdgeInsets.only(left: 20.0, top: 20.0), // Adjust padding here
+          padding: EdgeInsets.only(left: 10.0, top: 20.0),
           child: Text(
             'Find your ideal \nmedication',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 27.0),
@@ -33,29 +33,28 @@ class HomePage extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notification_important_rounded),
-            onPressed: () {
-              // Handle notification icon press
-            },
+            icon: const Icon(Icons.notifications_active_rounded),
+            onPressed: () {},
           ),
         ],
-        // Add padding to the top and bottom of the AppBar
         toolbarHeight: kToolbarHeight + 20.0,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Add more padding between the search bar and app bar
-              const SizedBox(height: 10.0),
+              const SizedBox(height: 30.0),
               Padding(
                 padding: const EdgeInsets.all(30.0),
                 child: SizedBox(
-                  height: 40.0, // Adjust height as needed
+                  height: 40.0,
                   child: TextField(
-                    maxLines: 1, // Only occupy one line
+                    maxLines: 1,
                     decoration: InputDecoration(
-                      prefixIcon: const Icon(Icons.search),
+                      prefixIcon: const Icon(
+                        Icons.search,
+                        size: 40.0,
+                      ),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20.0),
                       ),
@@ -63,74 +62,55 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  // Convert IconButton to ElevatedButton for better appearance
                   ElevatedButton(
-                    onPressed: () {
-                      // Handle favorite button press
-                    },
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: const Color(
-                          0xFF199A8E), // Set button foreground to white
-                      backgroundColor:
-                          Colors.white, // Set button background to grey
+                      foregroundColor: const Color(0xFF199A8E),
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(50.0), // Round corners
+                        borderRadius: BorderRadius.circular(50.0),
                       ),
-                      padding: const EdgeInsets.all(
-                          12.0), // Increase padding for larger icon
+                      padding: const EdgeInsets.all(12.0),
                     ),
                     child: const Icon(
                       Icons.medical_services_outlined,
-                      size: 30.0, // Increase icon size
+                      size: 30.0,
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {
-                      // Handle star button press
-                    },
+                    onPressed: () {},
                     style: ElevatedButton.styleFrom(
-                      foregroundColor: const Color(
-                          0xFF199A8E), // Set button foreground to white
-                      backgroundColor:
-                          Colors.white, // Set button background to grey
+                      foregroundColor: const Color(0xFF199A8E),
+                      backgroundColor: Colors.white,
                       shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(50.0), // Round corners
+                        borderRadius: BorderRadius.circular(50.0),
                       ),
-                      padding: const EdgeInsets.all(
-                          12.0), // Increase padding for larger icon
+                      padding: const EdgeInsets.all(12.0),
                     ),
                     child: const Icon(
                       Icons.chat,
-                      size: 30.0, // Increase icon size
+                      size: 30.0,
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 20.0),
-
               Row(
-                // Use Row for horizontal layout
-                crossAxisAlignment:
-                    CrossAxisAlignment.start, // Align text at top
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  // Text section with padding
                   const Expanded(
                     child: Padding(
                       padding: EdgeInsets.only(left: 30.0, right: 30.0),
                       child: Text(
                         'Hello user,\nhow are you feeling\nToday?',
                         style: TextStyle(
-                            fontSize: 18.0, fontWeight: FontWeight.bold),
+                            fontSize: 23.0, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
-
                   const SizedBox(width: 10.0),
                   SizedBox(
                     width: 200.0,
@@ -140,6 +120,53 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 20.0),
+              const Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                      child: Text(
+                        'Products with Offers?',
+                        style: TextStyle(
+                            fontSize: 20.0, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 20.0),
+              SizedBox(
+                height: 250.0,
+                child: ListView(
+                  scrollDirection: Axis.horizontal,
+                  padding: const EdgeInsets.only(left: 25.0, right: 25.0),
+                  children: [
+                    productCard(
+                      title: 'Paracetamol',
+                      imageUrl: 'assets/product1.jpg',
+                      price: 5.99,
+                    ),
+                    productCard(
+                      title: 'streptomycin',
+                      imageUrl: 'assets/streptomycin.jpg',
+                      price: 3.49,
+                    ),
+                    productCard(
+                      title: 'Eylea',
+                      imageUrl: 'assets/eylea.png',
+                      price: 9.99,
+                    ),
+                    productCard(
+                      title: 'Nad Injection',
+                      imageUrl:
+                          'assets/nad-injection-product-header-4217804413.png',
+                      price: 7.99,
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -154,9 +181,7 @@ class HomePage extends StatelessWidget {
                 Icons.home,
                 color: Color(0xFF199A8E),
               ),
-              onPressed: () {
-                // Handle home button press
-              },
+              onPressed: () {},
             ),
             IconButton(
               icon: const Icon(
@@ -181,4 +206,63 @@ class HomePage extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget productCard({
+  required String title,
+  required String imageUrl,
+  required double price,
+}) {
+  return Padding(
+    padding: const EdgeInsets.only(right: 10.0),
+    child: Container(
+      width: 180.0,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+        color: Colors.white,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.grey.withOpacity(0.2),
+            spreadRadius: 3.0,
+            blurRadius: 5.0,
+          ),
+        ],
+      ),
+      child: Stack(
+        children: [
+          ClipRRect(
+            borderRadius: BorderRadius.circular(10.0),
+            child: Image.asset(
+              imageUrl,
+              fit: BoxFit.cover,
+              height: 180.0,
+            ),
+          ),
+          Positioned(
+            bottom: 10.0,
+            left: 10.0,
+            child: Text(
+              title,
+              style: const TextStyle(
+                color: Colors.black,
+                fontWeight: FontWeight.bold,
+                fontSize: 16.0,
+              ),
+            ),
+          ),
+          Positioned(
+            bottom: 10.0,
+            right: 10.0,
+            child: Text(
+              '\$$price',
+              style: const TextStyle(
+                color: Colors.black,
+                fontSize: 14.0,
+              ),
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }
