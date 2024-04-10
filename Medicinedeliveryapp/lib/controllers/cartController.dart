@@ -1,0 +1,34 @@
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:flutter/material.dart';
+import 'package:medicinedeliveryapp/models/authModel.dart';
+import 'package:medicinedeliveryapp/models/config.dart';
+import 'package:provider/provider.dart';
+
+Future<void> addToCart(BuildContext context, String productID, String quantity) async {
+  final String apiUrl = API.API_URL + '/cart/add';
+  final String accessToken = Provider.of<AuthModel>(context, listen: false).accessToken;
+
+  final headers = {
+    'Authorization': 'Bearer $accessToken',
+    'Content-Type': 'application/json',
+  };
+
+ final body = jsonEncode({
+    'productID': productID, // Assuming the backend expects an 'orderId' field
+    'quantity': quantity,
+  });
+
+  final response = await http.post(
+    Uri.parse(apiUrl),
+    headers: headers,
+    body: body,
+  );
+
+  if (response.statusCode == 200) {
+    print("$productID added to cart");
+  } else {
+    // Handle error scenario
+    throw Exception('Failed add');
+  }
+}

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/components/product_card.dart';
+import 'package:medicinedeliveryapp/controllers/cartController.dart';
 import 'package:medicinedeliveryapp/controllers/productsController.dart';
 import 'package:medicinedeliveryapp/pages/patient/search_product.dart';
 
@@ -77,6 +78,7 @@ class _ProductStoreState extends State<ProductStore> {
                           onAddToCart: () {
                             // Implement your add to cart functionality here
                             print('Adding to cart');
+                            addToCart(context, product['_id'], "1");
                           },
                           onBuyNow: () {
                             // Implement your buy now functionality here
