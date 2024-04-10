@@ -2,6 +2,16 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
+String formatDateString(String dateString) {
+  DateTime dateTime = DateTime.parse(dateString);
+
+  // Construct a formatted date string
+  String formattedDate =
+      "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
+
+  return formattedDate;
+}
+
 class Product {
   final String imageUrl;
   final String name;
@@ -18,64 +28,77 @@ class Product {
   });
 }
 
-class ProductList extends StatefulWidget {
-  const ProductList({super.key});
+class ExpandedCard extends StatelessWidget {
+  final String imageUrl;
+  final String name;
+  final String description;
+  final String company;
+  final String expiredate;
+  final Function onDelete;
 
-  @override
-  State<ProductList> createState() => _ProductListState();
-}
+  ExpandedCard({
+    required this.imageUrl,
+    required this.name,
+    required this.description,
+    required this.company,
+    required this.expiredate,
+    required this.onDelete,
+  });
 
-class _ProductListState extends State<ProductList> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Center(
-          child: ListTile(
-            leading: Container(
-              height: 120.0,
-              width: 120.0,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(
-                      "http://192.168.1.3:3000/uploads/Product/image_1712677519981.jpg"),
-                  fit: BoxFit.fill,
-                ),
-                shape: BoxShape.circle,
+    
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.only(left: 5, right: 5),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: Image.network(imageUrl),
+            ),
+            Expanded(
+              flex: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(name),
+                  Text(description),
+                  Text(company),
+                  Text(formatDateString(expiredate)),
+                ],
               ),
             ),
-            title: Text("Paracetamol"),
-            subtitle: Text("headache relif medicine"),
-            trailing: SizedBox(
-              width: 35, // Set your desired width
-              height: 35, // Set your desired height
-              child: ElevatedButton(
-                onPressed: () {
-                  // Your onPressed functionality
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red, // Background color
-                  shape: RoundedRectangleBorder(
-                    // Shape with 5px border radius
-                    borderRadius: BorderRadius.circular(5),
+            Expanded(
+              flex: 1,
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.edit,
+                        color: Colors.green,
+                      ),
+                      onPressed: () {},
+                    ),
                   ),
-                  // Explicitly set padding to zero to eliminate any default padding
-                  padding: EdgeInsets.zero,
-                ),
-                child: Align(
-                  alignment: Alignment.center,
-                  child: Icon(
-                    Icons.delete,
-                    color: Colors.white,
-                    size: 20, // Icon color
+                  Align(
+                    alignment: Alignment.center,
+                    child: IconButton(
+                      icon: Icon(
+                        Icons.delete,
+                        color: Colors.red,
+                      ),
+                      onPressed: () {},
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
-            tileColor: Color.fromARGB(135, 202, 202, 202),
-          ),
+          ],
         ),
-      ],
+      ),
     );
   }
 }
