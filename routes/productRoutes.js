@@ -21,6 +21,7 @@ router.post(
   addProduct
 );
 router.get('/allProducts',validateToken,getTotalProducts); // for patients
+router.get('/allProductsPharmacy',validateToken,validatePharmaisist,getAllProducts); // for pharmacists
 // router.get('/:id',validateToken,getPharmacyById);
 
 module.exports = router;

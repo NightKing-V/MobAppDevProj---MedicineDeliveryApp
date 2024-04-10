@@ -109,13 +109,15 @@ const deleteProduct = asyncHandler(async (req, res) => {
 //@route GET /api/product/get/
 //@access private
 const getAllProducts = asyncHandler(async (req, res) => {
-  /// by pharmacy
-  // const usrID = req.user.id;
-  // const pharmacy = await Pharmacy.findOne({ownerID:usrID});
-  // if(!pharmacy){
-  //   return res.status(400).json({success:false,message:"forbidden!"});
-  // }
-  const products = Product.find({ pharmacyID: user.pharmacyID });
+
+  const products = await Product.find({ pharmacyID: req.user.pharmacyID });
+  products.map((product) => {
+    product.images = product.images.map((image) => {
+      const encodedPath = image.split("\\").map(encodeURIComponent).join("/");
+      return process.env.FILE_HOST + encodedPath;
+    });
+    return product;
+  });
   if (!products) {
     return res
       .status(404)
@@ -123,7 +125,7 @@ const getAllProducts = asyncHandler(async (req, res) => {
   }
   return res
     .status(200)
-    .json({ success: true, message: "Products retrived successfully!" });
+    .json({ success: true, message: "Products retrived successfully!",data:products });
 });
 
 //@desc get all products
