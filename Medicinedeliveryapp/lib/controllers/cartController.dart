@@ -5,16 +5,18 @@ import 'package:medicinedeliveryapp/models/authModel.dart';
 import 'package:medicinedeliveryapp/models/config.dart';
 import 'package:provider/provider.dart';
 
-Future<void> addToCart(BuildContext context, String productID, String quantity) async {
+Future<void> addToCart(
+    BuildContext context, String productID, String quantity) async {
   final String apiUrl = API.API_URL + '/cart/add';
-  final String accessToken = Provider.of<AuthModel>(context, listen: false).accessToken;
+  final String accessToken =
+      Provider.of<AuthModel>(context, listen: false).accessToken;
 
   final headers = {
     'Authorization': 'Bearer $accessToken',
     'Content-Type': 'application/json',
   };
 
- final body = jsonEncode({
+  final body = jsonEncode({
     'productID': productID, // Assuming the backend expects an 'orderId' field
     'quantity': quantity,
   });
@@ -30,5 +32,25 @@ Future<void> addToCart(BuildContext context, String productID, String quantity) 
   } else {
     // Handle error scenario
     throw Exception('Failed add');
+  }
+}
+
+Future<List<dynamic>> fetchCart(BuildContext context) async {
+  final String apiUrl = API.API_URL + '/cart/get';
+  final String accessToken =
+      Provider.of<AuthModel>(context, listen: false).accessToken;
+
+  final headers = {
+    'Authorization': 'Bearer $accessToken',
+  };
+
+  final response = await http.get(Uri.parse(apiUrl), headers: headers);
+
+  if (response.statusCode == 200) {
+    final List<dynamic> data = json.decode(response.body)['data'];
+    print(data);
+    return data;
+  } else {
+    throw Exception('Failed to fetch cart data');
   }
 }

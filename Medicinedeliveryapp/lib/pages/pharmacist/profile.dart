@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:medicinedeliveryapp/components/card_button.dart';
+import 'package:medicinedeliveryapp/models/authModel.dart';
+import 'package:medicinedeliveryapp/pages/patient/carts.dart';
+import 'package:provider/provider.dart';
 // import 'package:medicinedeliveryapp/pages/pharmacist/product_store.dart';
 
 class Profile extends StatelessWidget {
@@ -21,22 +23,124 @@ class Profile extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             Text(
-              'User Name', // Replace with username
+              Provider.of<AuthModel>(context).username, // Replace with username
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20.0),
-            Column(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.logout),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Profile()),
-                    );
-                  },
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 140, right: 100),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.start, // Align content to the left
+                    children: [
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CartPage()),
+                          );
+                        },
+                        icon: Icon(Icons.shopping_cart),
+                        label: Text("Cart"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 228, 228, 228),
+                          minimumSize:
+                              Size(150.0, 40.0),
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(18.0),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10.0), // Spacing between button and text
+                    ],
+                  ),
+                 Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.start, // Align content to the left
+                    children: [
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(builder: (context) => CartPages()),
+                          // );
+                        },
+                        icon: Icon(Icons.payment),
+                        label: Text("Payment"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 228, 228, 228),
+                          minimumSize:
+                              Size(150.0, 40.0),
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(18.0),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10.0), // Spacing between button and text
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.start, // Align content to the left
+                    children: [
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CartPage()),
+                          );
+                        },
+                        icon: Icon(Icons.favorite),
+                        label: Text("Favourites"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 228, 228, 228),
+                          minimumSize:
+                              Size(150.0, 40.0),
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(18.0),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10.0), // Spacing between button and text
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment:
+                        MainAxisAlignment.start, // Align content to the left
+                    children: [
+                      ElevatedButton.icon(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CartPage()),
+                          );
+                        },
+                        icon: Icon(Icons.logout),
+                        label: Text("Logout"),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Color.fromARGB(255, 228, 228, 228),
+                          minimumSize:
+                              Size(150.0, 40.0),
+                          padding: EdgeInsets.zero,
+                          shape: RoundedRectangleBorder(
+                            borderRadius:
+                                BorderRadius.circular(18.0),
+                          ),
+                        ),
+                      ),
+                      SizedBox(width: 10.0), // Spacing between button and text
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
