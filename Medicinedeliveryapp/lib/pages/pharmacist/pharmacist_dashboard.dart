@@ -4,7 +4,6 @@ import 'package:medicinedeliveryapp/pages/pharmacist/product_deliveries.dart';
 import 'package:medicinedeliveryapp/pages/pharmacist/product_orders.dart';
 import 'package:medicinedeliveryapp/pages/pharmacist/product_store.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -24,7 +23,7 @@ class PharmacistDashboard extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Welcome to Pharmacy App',
+          'Medic',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
         ),
         actions: [
@@ -42,6 +41,16 @@ class PharmacistDashboard extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
+              Center(
+                child: Padding(
+                  padding: const EdgeInsets.only(bottom: 5.0),
+                  child: Text(
+                    "Dashboard",
+                    style:
+                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                  ),
+                ),
+              ),
               SizedBox(height: 20.0), // Padding at the top
               Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -53,93 +62,90 @@ class PharmacistDashboard extends StatelessWidget {
                     ),
                     contentPadding:
                         EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
+                    // Add a search icon at the beginning of the text field
+                    prefixIcon: Icon(Icons.search),
                   ),
                 ),
               ),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 18.0),
-                  child: Text(
-                    "Dashboard",
-                    style:
-                        TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-                  ),
-                ),
-              ),
+
               // Constrain the height of the GridView
               Container(
                 height: 500, // Specify a fixed height for the GridView
-                child: GridView.count(
-                  crossAxisCount: 2,
-                  childAspectRatio:
-                      3 / 2, // Adjust the size ratio of the grid items
-                  crossAxisSpacing: 10, // Horizontal space between items
-                  mainAxisSpacing: 10, // Vertical space between items
-                  shrinkWrap:
-                      true, // Important to let GridView know to constrain its content
-                  physics:
-                      NeverScrollableScrollPhysics(), // To prevent GridView from scrolling
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      child: CardButton(
-                        title: "My Products",
-                        icon: Icons.inventory, // Use Icon widget directly
-                        color: Colors.green,
-                        onPressed: () {
-                          print("Navigating to PharmacistDashboard");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyProducts()),
-                          );
-                        },
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: GridView.count(
+                    crossAxisCount: 2,
+                    childAspectRatio:
+                        3 / 2, // Adjust the size ratio of the grid items
+                    crossAxisSpacing: 10, // Horizontal space between items
+                    mainAxisSpacing: 10, // Vertical space between items
+                    shrinkWrap:
+                        true, // Important to let GridView know to constrain its content
+                    physics:
+                        NeverScrollableScrollPhysics(), // To prevent GridView from scrolling
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: CardButton(
+                          title: "My Products",
+                          icon: Icons.inventory, // Use Icon widget directly
+                          color: Colors.green,
+                          onPressed: () {
+                            print("Navigating to PharmacistDashboard");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MyProducts()),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      child: CardButton(
-                        title: "My Orders",
-                        icon: Icons.list_alt, // Use Icon widget directly
-                        color: Colors.blue,
-                        onPressed: () {
-                          print("Navigating to PharmacistDashboard");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyOrders()),
-                          );
-                        },
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: CardButton(
+                          title: "My Orders",
+                          icon: Icons.list_alt, // Use Icon widget directly
+                          color: Colors.blue,
+                          onPressed: () {
+                            print("Navigating to PharmacistDashboard");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MyOrders()),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      child: CardButton(
-                        title: "My Deliveries",
-                        icon: Icons.local_shipping, // Use Icon widget directly
-                        color: Colors.orange,
-                        onPressed: () {
-                          print("Navigating to PharmacistDashboard");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => MyDeliveries()),
-                          );
-                        },
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: CardButton(
+                          title: "My Deliveries",
+                          icon:
+                              Icons.local_shipping, // Use Icon widget directly
+                          color: Colors.orange,
+                          onPressed: () {
+                            print("Navigating to PharmacistDashboard");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => MyDeliveries()),
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20, right: 20),
-                      child: CardButton(
-                        title: "Patient Chats",
-                        icon: Icons.chat, // Use Icon widget directly
-                        color: Colors.pink,
-                        onPressed: () {
-                          // Action for Patient Chats
-                        },
+                      Padding(
+                        padding: const EdgeInsets.only(left: 20, right: 20),
+                        child: CardButton(
+                          title: "Patient Chats",
+                          icon: Icons.chat, // Use Icon widget directly
+                          color: Colors.pink,
+                          onPressed: () {
+                            // Action for Patient Chats
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
 

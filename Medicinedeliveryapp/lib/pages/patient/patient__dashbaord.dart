@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/widgets.dart';
-
+import 'package:medicinedeliveryapp/pages/patient/patient_store.dart';
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +29,7 @@ class HomePage extends StatelessWidget {
           padding: EdgeInsets.only(left: 10.0, top: 20.0),
           child: Text(
             'Find your ideal \nmedication',
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 27.0),
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
           ),
         ),
         actions: [
@@ -186,11 +186,14 @@ class HomePage extends StatelessWidget {
             ),
             IconButton(
               icon: const Icon(
-                Icons.library_books_rounded,
+                Icons.medication,
                 color: Color(0xFF199A8E),
               ),
               onPressed: () {
-                // Handle search button press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProductStore()),
+                );
               },
             ),
             IconButton(
