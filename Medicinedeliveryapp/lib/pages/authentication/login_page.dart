@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/pages/patient/patient__dashbaord.dart';
+import 'package:medicinedeliveryapp/pages/pharmacist/pharmacist_dashboard.dart';
 import '../splash/logsignsplash.dart';
 import 'package:medicinedeliveryapp/controllers/loginController.dart';
 
@@ -128,6 +129,11 @@ class _LoginPageState extends State<LoginPage>
                           Navigator.push(
                             context,
                             MaterialPageRoute(builder: (context) => HomePage()),
+                          );
+                        }else if (result.role == "pharmacist") {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => PharmacistDashboard()),
                           );
                         }
                       } else {
