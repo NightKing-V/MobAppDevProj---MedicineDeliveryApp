@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:medicinedeliveryapp/pages/patient/prescription.dart';
 
 class Itemsdesc extends StatelessWidget {
   final String title, desc, price, imgurl;
@@ -28,13 +29,32 @@ class Itemsdesc extends StatelessWidget {
                     style: TextStyle(fontSize: 16.0),
                   ),
                   Text(
-                    '\n' + price+ ' LKR',
-                    style: TextStyle(fontSize: 18.0, color: Colors.red), textAlign: TextAlign.center,
+                    '\n' + price + ' LKR',
+                    style: TextStyle(fontSize: 18.0, color: Colors.red),
+                    textAlign: TextAlign.center,
                   ),
                 ])),
-            ElevatedButton(
-              onPressed: () {},
-              child: Text('Buy Now'),
+            Padding(
+              padding:
+                  const EdgeInsets.all(10.0), // Adjust padding values as needed
+              child: ElevatedButton(
+                onPressed: () {},
+                child:
+                    Text('Add to Cart', style: TextStyle(color: Colors.green)),
+              ),
+            ),
+            Padding(
+              padding:
+                  const EdgeInsets.all(10.0), // Adjust padding values as needed
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => Prescription()),
+                  );
+                },
+                child: Text('Buy Now', style: TextStyle(color: Colors.red)),
+              ),
             ),
           ],
         ),
