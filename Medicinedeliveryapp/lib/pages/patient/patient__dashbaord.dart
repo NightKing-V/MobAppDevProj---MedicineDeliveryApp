@@ -5,7 +5,6 @@ import 'package:medicinedeliveryapp/pages/patient/patient_store.dart';
 import 'package:medicinedeliveryapp/pages/patient/profile.dart';
 import 'package:medicinedeliveryapp/pages/patient/itemsdesc.dart';
 
-
 void main() {
   runApp(const MyApp());
 }
@@ -148,26 +147,66 @@ class HomePage extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   padding: const EdgeInsets.only(left: 25.0, right: 25.0),
                   children: [
-                    productCard(
-                      title: 'Paracetamol',
-                      imageUrl: 'assets/product1.jpg',
-                      price: 5.99,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Itemsdesc()),
+                        ); // danata mekata damme
+                      },
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Adjust corner radius as needed
+                      child: productCard(
+                        title: 'Paracetamol',
+                        imageUrl: 'assets/product1.jpg',
+                        price: 5.99,
+                      ),
                     ),
-                    productCard(
-                      title: 'streptomycin',
-                      imageUrl: 'assets/streptomycin.jpg',
-                      price: 3.49,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Itemsdesc()),
+                        ); // danata mekata damme
+                      },
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Adjust corner radius as needed
+                      child: productCard(
+                        title: 'streptomycin',
+                        imageUrl: 'assets/streptomycin.jpg',
+                        price: 3.49,
+                      ),
                     ),
-                    productCard(
-                      title: 'Eylea',
-                      imageUrl: 'assets/eylea.png',
-                      price: 9.99,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Itemsdesc()),
+                        ); // danata mekata damme
+                      },
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Adjust corner radius as needed
+                      child: productCard(
+                        title: 'Eylea',
+                        imageUrl: 'assets/eylea.png',
+                        price: 9.99,
+                      ),
                     ),
-                    productCard(
-                      title: 'Nad Injection',
-                      imageUrl:
-                          'assets/nad-injection-product-header-4217804413.png',
-                      price: 7.99,
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => Itemsdesc()),
+                        ); // danata mekata damme
+                      },
+                      borderRadius: BorderRadius.circular(
+                          10.0), // Adjust corner radius as needed
+                      child: productCard(
+                        title: 'Nad Injection',
+                        imageUrl:
+                            'assets/nad-injection-product-header-4217804413.png',
+                        price: 7.99,
+                      ),
                     ),
                   ],
                 ),
@@ -188,6 +227,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {},
             ),
             IconButton(
+<<<<<<< Updated upstream
               icon: const Icon(
                 Icons.medication,
                 color: Color(0xFF199A8E),
@@ -200,6 +240,13 @@ class HomePage extends StatelessWidget {
 
               },
             ),
+=======
+                icon: const Icon(
+                  Icons.library_books_rounded,
+                  color: Color(0xFF199A8E),
+                ),
+                onPressed: () {}),
+>>>>>>> Stashed changes
             IconButton(
               icon: const Icon(
                 Icons.settings,
@@ -209,7 +256,7 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Profile()),
-                );// Handle settings button press
+                ); // Handle settings button press
               },
             ),
           ],
