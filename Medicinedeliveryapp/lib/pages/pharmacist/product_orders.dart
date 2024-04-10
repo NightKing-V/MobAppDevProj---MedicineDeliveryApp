@@ -84,25 +84,28 @@ class _MyOrdersState extends State<MyOrders> {
                           padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
                           child: SizedBox(
                             width: double.infinity,
-                            child: ExpandedCard(
-                              firstName: product['userID']['firstName'],
-                              productId: product['product']['_id'],
-                              cost: product['cost'],
-                              qty: product['qty'],
-                              shipping: product['shipping'],
-                              status: product['status'],
-                              createdAt: product['createdAt'],
-                              onDelete: () {
-                                setState(() {
-                                  var productToRemove = snapshot.data![
-                                      index]; // Capture the product before removal
-                                  print(productToRemove['_id']);
-                                  deleteOrderById(
-                                      context, productToRemove['_id']);
-                                  snapshot.data!.removeAt(index);
-                                });
-                              },
-                            ),
+                            // Use a ternary operator for conditional widget rendering
+                            child: product['status'] == "processing"
+                                ? ExpandedCard(
+                                    firstName: product['userID']['firstName'],
+                                    productId: product['product']['_id'],
+                                    cost: product['cost'],
+                                    qty: product['qty'],
+                                    shipping: product['shipping'],
+                                    status: product['status'],
+                                    createdAt: product['createdAt'],
+                                    onDelete: () {
+                                      setState(() {
+                                        var productToRemove = snapshot.data![
+                                            index]; // Capture the product before removal
+                                        print(productToRemove['_id']);
+                                        deleteOrderById(
+                                            context, productToRemove['_id']);
+                                        snapshot.data!.removeAt(index);
+                                      });
+                                    },
+                                  )
+                                : Container(), // You can decide what to show when status is not "processing"
                           ),
                         );
                       },
