@@ -66,7 +66,7 @@ class ProductCard extends StatelessWidget {
                   children: [
                     ElevatedButton(
                       onPressed: onAddToCart,
-                      child: const Text('Add to Cart'),
+                      child: Icon(Icons.shopping_cart_outlined,color: Colors.white,),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
                         shape: RoundedRectangleBorder(
@@ -77,7 +77,7 @@ class ProductCard extends StatelessWidget {
                     const SizedBox(width: 8.0),
                     ElevatedButton(
                       onPressed: onBuyNow,
-                      child: const Text('Buy Now'),
+                      child: Icon(Icons.shopping_bag_outlined,color: Colors.white,),
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.green,
                         shape: RoundedRectangleBorder(

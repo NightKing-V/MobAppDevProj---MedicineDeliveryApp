@@ -31,7 +31,7 @@ class _ProductStoreState extends State<ProductStore> {
     return Scaffold(
       appBar: AppBar(
         title: const Padding(
-          padding: EdgeInsets.only(left: 10.0, top: 20.0),
+          padding: EdgeInsets.only(left: 10.0),
           child: Text(
             'Medical Products',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),

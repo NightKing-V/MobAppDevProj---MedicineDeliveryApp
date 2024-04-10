@@ -39,9 +39,10 @@ Future<LoginResult> loginAndGetAccessToken(
       final responseData = jsonDecode(response.body);
       final String accessToken = responseData['accessToken'];
       final String role = responseData['role'];
+      final String username = responseData['username'];
 
       // Store the accessToken using Provider
-      Provider.of<AuthModel>(context, listen: false).setToken(accessToken);
+      Provider.of<AuthModel>(context, listen: false).setToken(accessToken,username);
 
       return LoginResult(
         success: true,
