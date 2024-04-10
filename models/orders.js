@@ -7,14 +7,19 @@ const ordersSchema = new Schema({
         ref: 'User', 
         required: true
     },
-    products: [{
+    product: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Product',
         required: true,
-    }],
+    },
     cost:{
         type:Number,
         required:true,
+    },
+    qty:{
+        type:Number,
+        required:true,
+        default:1,
     },
     shipping:{
         type:Number,
@@ -23,7 +28,7 @@ const ordersSchema = new Schema({
     status:{
         type:String,
         required:true,
-        enum:["Processing", "Delivering", "Delivered"],
+        enum:["processing", "delivering", "delivered"],
         default:"Processing"
     }
 },{ timestamps: true , versionKey: false});
