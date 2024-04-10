@@ -28,36 +28,73 @@ class Profile extends StatelessWidget {
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20.0),
-            Column(
-              children: [
-                IconButton(
-                  icon: Icon(Icons.logout),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginPage()),
-                    );
-                  },
-                ),
-                IconButton(
-                  icon: Icon(Icons.payment),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Profile()),
-                    );
-                  },
-                ),
-                IconButton(
-                  icon: Icon(Icons.favorite),
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => Profile()),
-                    );
-                  },
-                ),
-              ],
+            Padding(
+              padding: const EdgeInsets.only(left: 140, right: 100),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      IconButton(
+                    icon: Icon(Icons.shopping_cart),
+                    onPressed: () {
+                    },
+                  ),
+                  SizedBox(width: 10,),
+                  Text("Cart",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      IconButton(
+                    icon: Icon(Icons.payment),
+                    onPressed: () {
+                      // Navigator.push(
+                      //   context,
+                      //   MaterialPageRoute(builder: (context) => LoginPage()),
+                      // );
+                    },
+                  ),
+                  SizedBox(width: 10,),
+                  Text("Payments",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
+                    ],
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      IconButton(
+                    icon: Icon(Icons.favorite),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                  ),
+                  SizedBox(width: 10,),
+                  Text("Favourites",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
+                    ],
+                  ),
+                  
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      IconButton(
+                    icon: Icon(Icons.logout),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => LoginPage()),
+                      );
+                    },
+                  ),
+                  SizedBox(width: 10,),
+                  Text("Logout",style: TextStyle(fontSize: 14,fontWeight: FontWeight.bold),),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),
