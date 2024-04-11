@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/models/authModel.dart';
-import 'package:medicinedeliveryapp/pages/patient/cart.dart';
+import 'package:medicinedeliveryapp/pages/patient/cart_page.dart';
 import 'package:provider/provider.dart';
 // import 'package:medicinedeliveryapp/pages/pharmacist/product_store.dart';
 
@@ -39,7 +39,7 @@ class Profile extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => CartPage()),
+                            MaterialPageRoute(builder: (context) => CartGrid()),
                           );
                         },
                         icon: Icon(Icons.shopping_cart),
@@ -64,10 +64,10 @@ class Profile extends StatelessWidget {
                     children: [
                       ElevatedButton.icon(
                         onPressed: () {
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(builder: (context) => CartPages()),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => CartGrid()),
+                          );
                         },
                         icon: Icon(Icons.payment),
                         label: Text("Payment"),
@@ -93,7 +93,7 @@ class Profile extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => CartPage()),
+                            MaterialPageRoute(builder: (context) => CartGrid()),
                           );
                         },
                         icon: Icon(Icons.favorite),
@@ -120,7 +120,7 @@ class Profile extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => CartPage()),
+                            MaterialPageRoute(builder: (context) => CartGrid()),
                           );
                         },
                         icon: Icon(Icons.logout),

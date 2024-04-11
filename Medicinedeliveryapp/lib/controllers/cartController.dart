@@ -2,6 +2,7 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/models/authModel.dart';
+import 'package:medicinedeliveryapp/models/cart_model.dart';
 import 'package:medicinedeliveryapp/models/config.dart';
 import 'package:provider/provider.dart';
 
@@ -50,6 +51,31 @@ Future<List<dynamic>> fetchCart(BuildContext context) async {
     final List<dynamic> data = json.decode(response.body)['data'];
     print(data);
     return data;
+  } else {
+    throw Exception('Failed to fetch cart data');
+  }
+}
+
+Future<List<Cart>> getCart(BuildContext context) async {
+  final String apiUrl = API.API_URL + '/cart/get';
+  final String accessToken =
+      Provider.of<AuthModel>(context, listen: false).accessToken;
+
+  final headers = {
+    'Authorization': 'Bearer $accessToken',
+  };
+
+  final response = await http.get(Uri.parse(apiUrl), headers: headers);
+
+  if (response.statusCode == 200) {
+    // Decode the JSON response into a List<dynamic>
+    List jsonData = json.decode(response.body)['data'] as List;
+    List<Cart> carts = jsonData
+        .map<Cart>(
+            (jsonItem) => Cart.fromJson(jsonItem as Map<String, dynamic>))
+        .toList();
+    print(carts.length);
+    return carts;
   } else {
     throw Exception('Failed to fetch cart data');
   }
