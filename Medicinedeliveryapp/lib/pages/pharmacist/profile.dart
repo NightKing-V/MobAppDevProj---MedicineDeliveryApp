@@ -3,6 +3,8 @@ import 'package:medicinedeliveryapp/models/authModel.dart';
 import 'package:medicinedeliveryapp/pages/patient/cart_page.dart';
 import 'package:medicinedeliveryapp/pages/pharmacist/pharmacist_dashboard.dart';
 import 'package:provider/provider.dart';
+import 'package:medicinedeliveryapp/pages/authentication/login_page.dart';
+
 // import 'package:medicinedeliveryapp/pages/pharmacist/product_store.dart';
 
 class Profile extends StatelessWidget {
@@ -29,12 +31,12 @@ class Profile extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             Padding(
-              padding: const EdgeInsets.only(left: 140, right: 100),
+              padding: const EdgeInsets.only(left: 100, right: 100),
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment:
-                        MainAxisAlignment.start, // Align content to the left
+                        MainAxisAlignment.center, // Align content to the left
                     children: [
                       ElevatedButton.icon(
                         onPressed: () {
@@ -61,7 +63,7 @@ class Profile extends StatelessWidget {
                   ),
                  Row(
                     mainAxisAlignment:
-                        MainAxisAlignment.start, // Align content to the left
+                        MainAxisAlignment.center, // Align content to the left
                     children: [
                       ElevatedButton.icon(
                         onPressed: () {
@@ -88,7 +90,7 @@ class Profile extends StatelessWidget {
                   ),
                   Row(
                     mainAxisAlignment:
-                        MainAxisAlignment.start, // Align content to the left
+                        MainAxisAlignment.center, // Align content to the left
                     children: [
                       ElevatedButton.icon(
                         onPressed: () {
@@ -115,13 +117,14 @@ class Profile extends StatelessWidget {
                   ),
                   Row(
                     mainAxisAlignment:
-                        MainAxisAlignment.start, // Align content to the left
+                        MainAxisAlignment.center, // Align content to the left
                     children: [
                       ElevatedButton.icon(
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => CartGrid()),
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()),
                           );
                         },
                         icon: Icon(Icons.logout),

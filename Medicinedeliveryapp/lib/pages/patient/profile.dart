@@ -30,12 +30,12 @@ class Profile extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             Padding(
-              padding: const EdgeInsets.only(left: 140, right: 100),
+              padding: const EdgeInsets.only(left: 100, right: 100),
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment:
-                        MainAxisAlignment.start, // Align content to the left
+                        MainAxisAlignment.center, // Align content to the left
                     children: [
                       ElevatedButton.icon(
                         onPressed: () {
@@ -48,21 +48,18 @@ class Profile extends StatelessWidget {
                         label: Text("Cart"),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 228, 228, 228),
-                          minimumSize:
-                              Size(150.0, 40.0),
+                          minimumSize: Size(150.0, 40.0),
                           padding: EdgeInsets.zero,
                           shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(18.0),
+                            borderRadius: BorderRadius.circular(18.0),
                           ),
                         ),
                       ),
                       SizedBox(width: 10.0), // Spacing between button and text
                     ],
                   ),
-                 Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.start, // Align content to the left
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton.icon(
                         onPressed: () {
@@ -75,12 +72,10 @@ class Profile extends StatelessWidget {
                         label: Text("Payment"),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 228, 228, 228),
-                          minimumSize:
-                              Size(150.0, 40.0),
+                          minimumSize: Size(150.0, 40.0),
                           padding: EdgeInsets.zero,
                           shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(18.0),
+                            borderRadius: BorderRadius.circular(18.0),
                           ),
                         ),
                       ),
@@ -88,8 +83,7 @@ class Profile extends StatelessWidget {
                     ],
                   ),
                   Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.start, // Align content to the left
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton.icon(
                         onPressed: () {
@@ -102,12 +96,10 @@ class Profile extends StatelessWidget {
                         label: Text("Favourites"),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 228, 228, 228),
-                          minimumSize:
-                              Size(150.0, 40.0),
+                          minimumSize: Size(150.0, 40.0),
                           padding: EdgeInsets.zero,
                           shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(18.0),
+                            borderRadius: BorderRadius.circular(18.0),
                           ),
                         ),
                       ),
@@ -115,26 +107,24 @@ class Profile extends StatelessWidget {
                     ],
                   ),
                   Row(
-                    mainAxisAlignment:
-                        MainAxisAlignment.start, // Align content to the left
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       ElevatedButton.icon(
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => LoginPage()),
+                            MaterialPageRoute(
+                                builder: (context) => LoginPage()),
                           );
                         },
                         icon: Icon(Icons.logout),
                         label: Text("Logout"),
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Color.fromARGB(255, 228, 228, 228),
-                          minimumSize:
-                              Size(150.0, 40.0),
+                          minimumSize: Size(150.0, 40.0),
                           padding: EdgeInsets.zero,
                           shape: RoundedRectangleBorder(
-                            borderRadius:
-                                BorderRadius.circular(18.0),
+                            borderRadius: BorderRadius.circular(18.0),
                           ),
                         ),
                       ),
