@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/models/authModel.dart';
 import 'package:medicinedeliveryapp/models/cart_model.dart';
 import 'package:medicinedeliveryapp/models/config.dart';
-import 'package:medicinedeliveryapp/pages/authentication/login_page.dart';
 import 'package:provider/provider.dart';
 
 Future<void> addToCart(
@@ -53,10 +52,6 @@ Future<List<dynamic>> fetchCart(BuildContext context) async {
     print(data);
     return data;
   } else {
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => LoginPage()),
-  );
     throw Exception('Failed to fetch cart data');
   }
 }
@@ -81,10 +76,6 @@ Future<List<Cart>> getCart(BuildContext context) async {
         .toList();
     return carts;
   } else {
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => LoginPage()),
-  );
     throw Exception('Failed to fetch cart data');
   }
 }

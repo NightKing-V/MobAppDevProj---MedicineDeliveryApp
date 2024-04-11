@@ -52,10 +52,6 @@ Future<List<ProductItem>> getProducts(BuildContext context) async {
         .toList();
     return items;
   } else {
-    Navigator.push(
-    context,
-    MaterialPageRoute(builder: (context) => LoginPage()),
-  );
     throw Exception('Failed to fetch cart data');
     
   }
