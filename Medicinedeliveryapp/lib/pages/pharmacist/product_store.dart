@@ -1,154 +1,149 @@
 import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/components/pharmacy_product_list.dart';
 import 'package:medicinedeliveryapp/controllers/pharmacist_products.dart';
+import 'package:medicinedeliveryapp/models/product_model.dart';
+import 'package:medicinedeliveryapp/pages/patient/patient_store.dart';
+import 'package:medicinedeliveryapp/pages/patient/profile.dart';
 import 'package:medicinedeliveryapp/pages/pharmacist/add_product.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: MyProducts(),
+    return const MaterialApp(
+      home: MyProduct(),
     );
   }
 }
 
-class MyProducts extends StatelessWidget {
+class MyProduct extends StatefulWidget {
+  const MyProduct({super.key});
+
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          'Product Inventory',
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(Icons.search),
-            onPressed: () {
-              // Handle notification icon press
-            },
-          ),
-        ],
-        // Add padding to the top and bottom of the AppBar
-        toolbarHeight: kToolbarHeight + 20.0,
-      ),
-      body: SafeArea(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              // Add more padding between the search bar and app bar
-              SizedBox(height: 20.0),
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 18.0),
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 20),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.end,
-                      children: [
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                            context,
-                            MaterialPageRoute(builder: (context) => AddProduct()),
-                          );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.green, // Set the background color to green
-                          ),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min, // Use the minimum amount of space
-                            children: [
-                              Icon(Icons.add, color: Colors.white), // Change icon color to white for better contrast
-                              SizedBox(width: 4), // Add some spacing between the icon and the text
-                              Text("Add", style: TextStyle(color: Colors.white)), // Text color is also white for contrast
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
+  State<MyProduct> createState() => _MyProductState();
+}
 
+class _MyProductState extends State<MyProduct> {
+  late Future<List<ProductItem>> futureCart;
+  @override
+  void initState() {
+    super.initState();
+    futureCart = getProducts(context) as Future<List<ProductItem>>;
+  }
+
+  Future<void> deleteItem(String itemId) async {
+    await deleteFromProduct(context, itemId);
+    setState(() {
+      futureCart = getProducts(context) as Future<List<ProductItem>>; // Re-fetch or adjust your list accordingly
+    });
+  }
+
+  @override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: Text(
+        "Product Inventory",
+        style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+      ),
+      centerTitle: true,
+    ),
+    body: Column( // Use Column to layout the button and the FutureBuilder
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0), // Add some padding around the button
+          child: Align(
+            alignment: Alignment.centerLeft, // Align the button to the right
+            child: ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AddProduct()), // Navigate to your AddProductPage when the button is pressed
+                );
+              },
+              child: Container(
+                width: 100,
+                child: Row(
+                  children: [Icon(Icons.add),SizedBox(width: 5,),Text('Add Product',style: TextStyle(fontSize: 12,color: Colors.white, fontWeight: FontWeight.bold),),],
                 ),
               ),
-              Center(
-                child: FutureBuilder<List<dynamic>>(
-                  future: fetchAllProductsByPharmacy(context),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      // Extract your data into a variable for ease of access
-                      final List<dynamic> data = snapshot.data!;
-
-                      // Iterate over the data and create a widget for each item
-                      List<Widget> productList = data.map((product) {
-                        return Padding(
-                          padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
-                          child: SizedBox(
-                            width: double.infinity,
-                            child: ExpandedCard(
-                              imageUrl: product['images'][0],
-                              name: product['name'],
-                              description: product['description'],
-                              company: product[
-                                  'manufacturer'], // Assuming this matches your data structure
-                              expiredate:
-                                  product['expiryDate'], // Corrected field name
-                              onDelete: () {
-                                // Handle delete button press
-                              },
-                            ),
-                          ),
-                        );
-                      }).toList();
-
-                      // Use a Column to display all product widgets. You might need to wrap this with a SingleChildScrollView for scrolling.
-                      return SingleChildScrollView(
-                        child: Column(
-                          children: productList,
-                        ),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.green, // Use your theme color
+              ),
+            ),
+          ),
+        ),
+        SizedBox(height: 20,),
+        Expanded( // Use Expanded to fill the remaining space with the FutureBuilder
+          child: Center(
+            child: FutureBuilder<List<ProductItem>>(
+              future: futureCart,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasData) {
+                  final allItems = snapshot.data!;
+                  return ListView.builder(
+                    itemCount: allItems.length,
+                    itemBuilder: (context, index) {
+                      final item = allItems[index];
+                      return ExpandedCard(
+                        imageUrl: item.images[0],
+                        name: item.name,
+                        description: item.description,
+                        company: item.manufacturer,
+                        expiredate: item.expiryDate.toIso8601String(),
+                        onDelete: () => deleteItem(item.id),
                       );
-                    } else if (snapshot.hasError) {
-                      // Handle error state
-                      return Text('Error: ${snapshot.error}');
-                    }
-                    // Show a loading indicator while waiting for the data
-                    return CircularProgressIndicator();
-                  },
-                ),
-              ),
-
-              //ProductList(),
-              // Text(Provider.of<AuthModel>(context).accessToken), //access token
-              // Add more widgets as needed
-              // For example, you can add more Text, Image, or other widgets here
-            ],
+                    },
+                  );
+                } else {
+                  return const Text("No data available");
+                }
+              },
+            ),
           ),
         ),
-      ),
+      ],
+    ),
       bottomNavigationBar: BottomAppBar(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             IconButton(
-              icon: Icon(Icons.home),
+              icon: const Icon(
+                Icons.home,
+                color: Color(0xFF199A8E),
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.medication,
+                color: Color(0xFF199A8E),
+              ),
               onPressed: () {
-                // Handle home button press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProductStore()),
+                );
               },
             ),
             IconButton(
-              icon: Icon(Icons.library_books_rounded),
+              icon: const Icon(
+                Icons.account_circle,
+                color: Color(0xFF199A8E),
+              ),
               onPressed: () {
-                // Handle search button press
-              },
-            ),
-            IconButton(
-              icon: Icon(Icons.settings),
-              onPressed: () {
-                // Handle settings button press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Profile()),
+                ); // Handle settings button press
               },
             ),
           ],

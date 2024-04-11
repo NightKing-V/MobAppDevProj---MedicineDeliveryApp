@@ -39,7 +39,11 @@ class PharmacistDashboard extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.notification_important_rounded),
             onPressed: () {
-              // Handle notification icon press
+              // Navigator.push(
+              //                 context,
+              //                 MaterialPageRoute(
+              //                     builder: (context) => Product()),
+              //               );
             },
           ),
         ],
@@ -136,7 +140,7 @@ class PharmacistDashboard extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => MyProducts()),
+                                  builder: (context) => MyProduct()),
                             );
                           },
                         ),

@@ -34,7 +34,7 @@ class ExpandedCard extends StatelessWidget {
   final String description;
   final String company;
   final String expiredate;
-  final Function onDelete;
+  final VoidCallback onDelete;
 
   ExpandedCard({
     required this.imageUrl,
@@ -90,7 +90,7 @@ class ExpandedCard extends StatelessWidget {
                         Icons.delete,
                         color: Colors.red,
                       ),
-                      onPressed: () {},
+                      onPressed: onDelete,
                     ),
                   ),
                 ],

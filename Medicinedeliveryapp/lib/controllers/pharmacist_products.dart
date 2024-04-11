@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:medicinedeliveryapp/models/authModel.dart';
 import 'package:medicinedeliveryapp/models/config.dart';
+import 'package:medicinedeliveryapp/models/product_model.dart';
+import 'package:medicinedeliveryapp/pages/authentication/login_page.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 import 'package:mime/mime.dart';
@@ -11,7 +13,9 @@ import 'package:path/path.dart' as path;
 
 Future<List<dynamic>> fetchAllProductsByPharmacy(BuildContext context) async {
   final String apiUrl = API.API_URL + '/products/allProductsPharmacy';
-  final String accessToken = Provider.of<AuthModel>(context).accessToken;
+  final authModel = Provider.of<AuthModel>(context, listen: false);
+  final String accessToken = authModel.accessToken;
+  
 
   final headers = {
     'Authorization': 'Bearer $accessToken',
@@ -25,6 +29,54 @@ Future<List<dynamic>> fetchAllProductsByPharmacy(BuildContext context) async {
     return data;
   } else {
     throw Exception('Failed to fetch data');
+  }
+}
+
+Future<List<ProductItem>> getProducts(BuildContext context) async {
+  final String apiUrl = API.API_URL + '/products/allProductsPharmacy';
+  final String accessToken =
+      Provider.of<AuthModel>(context, listen: false).accessToken;
+
+  final headers = {
+    'Authorization': 'Bearer $accessToken',
+  };
+
+  final response = await http.get(Uri.parse(apiUrl), headers: headers);
+
+  if (response.statusCode == 200) {
+    // Decode the JSON response into a List<dynamic>
+    List jsonData = json.decode(response.body)['data'] as List;
+    List<ProductItem> items = jsonData
+        .map<ProductItem>(
+            (jsonItem) => ProductItem.fromJson(jsonItem as Map<String, dynamic>))
+        .toList();
+    return items;
+  } else {
+    Navigator.push(
+    context,
+    MaterialPageRoute(builder: (context) => LoginPage()),
+  );
+    throw Exception('Failed to fetch cart data');
+    
+  }
+}
+
+Future<void> deleteFromProduct(BuildContext context, String productID) async {
+  final String apiUrl = API.API_URL + '/products/remove/$productID';
+  final String accessToken = Provider.of<AuthModel>(context, listen: false).accessToken;
+
+  final headers = {
+    'Authorization': 'Bearer $accessToken',
+  };
+
+  final response = await http.delete(Uri.parse(apiUrl), headers: headers);
+
+  if (response.statusCode == 200) {
+    // Successfully deleted the order
+    print("Order deleted successfully");
+  } else {
+    // Handle error scenario
+    throw Exception('Failed to delete order');
   }
 }
 
