@@ -28,7 +28,7 @@ class _MyDeliveriesState extends State<MyDeliveries> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Welcome to Pharmacy App',
+          'Delivery Details',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
         ),
         actions: [
@@ -46,24 +46,11 @@ class _MyDeliveriesState extends State<MyDeliveries> {
           child: Column(
             children: [
               SizedBox(height: 20.0),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Search',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-                  ),
-                ),
-              ),
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 18.0),
                   child: Text(
-                    "My Deliveries",
+                    "Ongoing Deliveries",
                     style:
                         TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
                   ),

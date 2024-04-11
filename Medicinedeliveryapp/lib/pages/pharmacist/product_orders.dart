@@ -28,12 +28,12 @@ class _MyOrdersState extends State<MyOrders> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          'Welcome to Pharmacy App',
+          'Pending Orders',
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
         ),
         actions: [
           IconButton(
-            icon: Icon(Icons.notification_important_rounded),
+            icon: Icon(Icons.search),
             onPressed: () {
               // Handle notification icon press
             },
@@ -46,19 +46,6 @@ class _MyOrdersState extends State<MyOrders> {
           child: Column(
             children: [
               SizedBox(height: 20.0),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Search',
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(30.0),
-                    ),
-                    contentPadding:
-                        EdgeInsets.symmetric(vertical: 5.0, horizontal: 20.0),
-                  ),
-                ),
-              ),
               Center(
                 child: Padding(
                   padding: const EdgeInsets.only(bottom: 18.0),

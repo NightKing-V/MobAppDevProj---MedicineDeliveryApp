@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/models/authModel.dart';
+import 'package:medicinedeliveryapp/pages/authentication/login_page.dart';
 import 'package:medicinedeliveryapp/pages/patient/cart_page.dart';
 import 'package:medicinedeliveryapp/pages/patient/patient_store.dart';
 import 'package:provider/provider.dart';
@@ -121,7 +122,7 @@ class Profile extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => CartGrid()),
+                            MaterialPageRoute(builder: (context) => LoginPage()),
                           );
                         },
                         icon: Icon(Icons.logout),

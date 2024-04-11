@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/models/authModel.dart';
 import 'package:medicinedeliveryapp/pages/patient/cart_page.dart';
+import 'package:medicinedeliveryapp/pages/pharmacist/pharmacist_dashboard.dart';
 import 'package:provider/provider.dart';
 // import 'package:medicinedeliveryapp/pages/pharmacist/product_store.dart';
 
@@ -141,6 +142,37 @@ class Profile extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: Icon(Icons.home,color: Colors.green,),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => PharmacistDashboard()),
+                );
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.library_books_rounded,color: Colors.green,),
+              onPressed: () {
+                // Handle search button press
+              },
+            ),
+            IconButton(
+              icon: Icon(Icons.account_circle,color: Colors.green,),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Profile()),
+                );
+              },
             ),
           ],
         ),

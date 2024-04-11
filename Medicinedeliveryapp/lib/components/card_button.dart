@@ -21,25 +21,29 @@ class CardButton extends StatelessWidget {
         child: InkWell(
           onTap: onPressed,
           child: Container(
-                height: 150,
+                height: 100,
                 width: 100,
                 decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15), color: this.color),
                 child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Icon(
+                this.icon,
+                size: 40,
+                color: Colors.white,
+              ),
+            ),
             Center(
               child: Padding(
                 padding: const EdgeInsets.only(top: 15.0),
                 child: Text(
                   this.title,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14,color: Colors.white),
                 ),
               ),
             ),
-            Icon(
-              this.icon,
-              size: 50,
-            )
           ],
                 ),
               ),
