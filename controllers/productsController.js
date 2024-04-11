@@ -24,7 +24,7 @@ const addProduct = asyncHandler(async (req, res) => {
 
   if (missingFields.length) {
     return res
-      .status(400)
+      .status(403)
       .json({
         success: false,
         message: `Missing required fields: ${missingFields.join(", ")}`,
@@ -43,7 +43,7 @@ const addProduct = asyncHandler(async (req, res) => {
       manufacturer,
       expiryDate,
       images: imagePath,
-      pharmacyID: req.pharmacyID,
+      pharmacyID: req.user.pharmacyID,
     });
     newProduct.images = newProduct.images.map((image) => {
       const encodedPath = image.split("\\").map(encodeURIComponent).join("/");
@@ -59,7 +59,7 @@ const addProduct = asyncHandler(async (req, res) => {
   } catch (error) {
     console.error("Failed to create product:", error);
     res
-      .status(400)
+      .status(402)
       .json({ success: false, message: "Failed to create product" });
   }
 });
@@ -89,18 +89,17 @@ const updateProduct = asyncHandler(async (req, res) => {
 });
 
 //@desc delete a product
-//@route DELETE /api/product/delete/:id
+//@route DELETE /api/products/remove/:id
 //@access private
 const deleteProduct = asyncHandler(async (req, res) => {
-  const product = await Product.findById(req.params.id);
+  const productID = req.params.id;
+  const product = await Product.findByIdAndDelete(productID);
   if (!product) {
     return res
       .status(404)
       .json({ success: false, message: "Product not found." });
   }
-
-  await product.remove();
-  res
+    return res
     .status(200)
     .json({ success: true, message: "Product deleted successfully." });
 });
