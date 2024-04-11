@@ -87,7 +87,7 @@ class _AddProductState extends State<AddProduct> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add Product'),
+        title: Text('Add Product',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
         centerTitle: true,
       ),
       body: SingleChildScrollView( // Allow scrolling for long forms
@@ -117,7 +117,7 @@ class _AddProductState extends State<AddProduct> {
                   labelText: 'Description',
                   border: OutlineInputBorder(),
                 ),
-                maxLines: 5, // Allow multiple lines for description
+                maxLines: 2, // Allow multiple lines for description
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a product description';
@@ -215,7 +215,7 @@ class _AddProductState extends State<AddProduct> {
               TextFormField(
                 controller: _expiryDateController,
                 decoration: InputDecoration(
-                  labelText: 'Expiry Date',
+                  labelText: 'Expiry Date (yyyy-MM-dd)',
                   border: OutlineInputBorder(),
                 ),
                 validator: (value) {
@@ -233,13 +233,20 @@ class _AddProductState extends State<AddProduct> {
                   height: 150,
                 ),
               const SizedBox(height: 10.0),
-              ElevatedButton(
+             Row(
+              children: [
+                 ElevatedButton(
                 onPressed: _getImage,
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green, // Button color
                 ),
-                child: Text('Pick Image'),
+                child: 
+                  Icon(Icons.photo_camera,color: Colors.white,),
               ),
+              SizedBox(width: 10,),
+              Text("Choose an image",style: TextStyle(fontWeight: FontWeight.bold),)
+              ],
+             ),
               const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () {
@@ -248,7 +255,7 @@ class _AddProductState extends State<AddProduct> {
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue, // Button color
                 ),
-                child: Text('Submit Product'),
+                child: Text('Add Product',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
               ),
             ],
           ),
