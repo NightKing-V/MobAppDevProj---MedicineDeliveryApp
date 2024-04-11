@@ -101,6 +101,7 @@ class PharmacistDashboard extends StatelessWidget {
                               child: Icon(
                                 Icons.medical_information,
                                 size: 50,
+                                color: Color.fromARGB(255, 255, 255, 255),
                               ),
                             ),
                           ],
