@@ -81,6 +81,7 @@ class _MyOrdersState extends State<MyOrders> {
                                     shipping: product['shipping'],
                                     status: product['status'],
                                     createdAt: product['createdAt'],
+                                    sicon: Icon(Icons.local_shipping, color: const Color.fromARGB(255, 39, 34, 17)),
                                     onDelete: () {
                                       setState(() {
                                         var productToRemove = snapshot.data![
@@ -90,6 +91,10 @@ class _MyOrdersState extends State<MyOrders> {
                                             context, productToRemove['_id']);
                                         snapshot.data!.removeAt(index);
                                       });
+                                    },
+                                    onMove: () {
+                                      changeState(context,
+                                          snapshot.data![index]['_id']);
                                     },
                                   )
                                 : Container(), // You can decide what to show when status is not "processing"

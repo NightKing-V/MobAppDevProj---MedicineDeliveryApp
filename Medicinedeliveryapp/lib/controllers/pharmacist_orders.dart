@@ -24,9 +24,84 @@ Future<List<dynamic>> fetchAllOrdersByPharmacy(BuildContext context) async {
   }
 }
 
+Future<void> changeState(BuildContext context, String orderID) async {
+  print(orderID);
+  final String apiUrl = API.API_URL + '/orders/status/$orderID';
+  final String accessToken =
+      Provider.of<AuthModel>(context, listen: false).accessToken;
+
+  final headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer $accessToken',
+  };
+
+  final body = jsonEncode({
+    'status': 'delivering',
+  });
+
+  try {
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      print("order state changed");
+      // Optionally process the response data if needed
+      // final data = jsonDecode(response.body);
+    } else {
+      print('Failed to change order state: Status Code ${response.statusCode}');
+      print('Response Body: ${response.body}');
+      throw Exception('Failed to fetch data: ${response.body}');
+    }
+  } catch (e) {
+    print('An error occurred: $e');
+    throw Exception('An error occurred when trying to change the order state');
+  }
+}
+
+Future<void> completeOrder(BuildContext context, String orderID) async {
+  print(orderID);
+  final String apiUrl = API.API_URL + '/orders/status/$orderID';
+  final String accessToken =
+      Provider.of<AuthModel>(context, listen: false).accessToken;
+
+  final headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer $accessToken',
+  };
+
+  final body = jsonEncode({
+    'status': 'completed',
+  });
+
+  try {
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: headers,
+      body: body,
+    );
+
+    if (response.statusCode == 200) {
+      print("order state changed");
+      // Optionally process the response data if needed
+      // final data = jsonDecode(response.body);
+    } else {
+      print('Failed to change order state: Status Code ${response.statusCode}');
+      print('Response Body: ${response.body}');
+      throw Exception('Failed to fetch data: ${response.body}');
+    }
+  } catch (e) {
+    print('An error occurred: $e');
+    throw Exception('An error occurred when trying to change the order state');
+  }
+}
+
 Future<void> deleteOrderById(BuildContext context, String orderId) async {
   final String apiUrl = API.API_URL + '/orders/delete/$orderId';
-  final String accessToken = Provider.of<AuthModel>(context, listen: false).accessToken;
+  final String accessToken =
+      Provider.of<AuthModel>(context, listen: false).accessToken;
 
   final headers = {
     'Authorization': 'Bearer $accessToken',

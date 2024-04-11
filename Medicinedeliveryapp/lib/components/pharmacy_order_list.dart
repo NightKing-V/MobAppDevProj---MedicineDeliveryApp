@@ -15,7 +15,9 @@ class ExpandedCard extends StatelessWidget {
   final int shipping;
   final String status;
   final String createdAt;
+  final Icon sicon;
   final Function onDelete;
+  final Function onMove;
 
   ExpandedCard({
     required this.firstName,
@@ -25,7 +27,9 @@ class ExpandedCard extends StatelessWidget {
     required this.shipping,
     required this.status,
     required this.createdAt,
+    required this.sicon,
     required this.onDelete,
+    required this.onMove,
   });
 
   @override
@@ -47,12 +51,8 @@ class ExpandedCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 IconButton(
-                  icon: Icon(Icons.local_shipping, color: const Color.fromARGB(255, 39, 34, 17)),
-                  onPressed: () {}, // Implement edit functionality here
-                ),
-                IconButton(
-                  icon: Icon(Icons.done, color: Colors.green),
-                  onPressed: () {}, // Implement edit functionality here
+                  icon: sicon,
+                  onPressed: () => onMove(), // Implement edit functionality here
                 ),
                 IconButton(
                   icon: Icon(Icons.delete, color: Colors.red),
