@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/widgets.dart';
+import 'package:medicinedeliveryapp/models/authModel.dart';
 import 'package:medicinedeliveryapp/pages/patient/patient_store.dart';
 import 'package:medicinedeliveryapp/pages/patient/profile.dart';
 import 'package:medicinedeliveryapp/pages/patient/itemsdesc.dart';
+import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() {
   runApp(const MyApp());
@@ -23,24 +26,55 @@ class MyApp extends StatelessWidget {
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
 
+  Future<void> _launchCaller() async {
+    final Uri url = Uri.parse('tel:1990');
+    print("calling");
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  Future<void> _sendSMS(number) async {
+    final Uri url = Uri.parse('sms:12345?body=hello');
+    print("msg");
+    if (await canLaunchUrl(url)) {
+      await launchUrl(
+      url,
+      mode: LaunchMode.externalApplication, // Explicitly use an external application
+    );
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
+    final String username = Provider.of<AuthModel>(context).username;
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         title: const Padding(
           padding: EdgeInsets.only(left: 10.0, top: 20.0),
           child: Text(
-            'Find your ideal \nmedication',
+            'Medic',
             style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
           ),
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.notifications_active_rounded),
-            onPressed: () {},
-          ),
+              icon: const Icon(Icons.notifications_active_rounded),
+              onPressed: () {}),
         ],
         toolbarHeight: kToolbarHeight + 20.0,
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () async {
+          _launchCaller();
+        },
+        backgroundColor: Colors.amber,
+        child: const Icon(Icons.phone_enabled),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -79,12 +113,14 @@ class HomePage extends StatelessWidget {
                       padding: const EdgeInsets.all(12.0),
                     ),
                     child: const Icon(
-                      Icons.medical_services_outlined,
+                      Icons.photo_camera,
                       size: 30.0,
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () async {
+                      _sendSMS("123456");
+                    },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: const Color(0xFF199A8E),
                       backgroundColor: Colors.white,
@@ -104,13 +140,13 @@ class HomePage extends StatelessWidget {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Expanded(
+                  Expanded(
                     child: Padding(
                       padding: EdgeInsets.only(left: 30.0, right: 30.0),
                       child: Text(
-                        'Hello user,\nhow are you feeling\nToday?',
+                        'Hello $username,\nhow are you feeling\nToday?',
                         style: TextStyle(
-                            fontSize: 23.0, fontWeight: FontWeight.bold),
+                            fontSize: 20.0, fontWeight: FontWeight.bold),
                       ),
                     ),
                   ),
@@ -151,8 +187,13 @@ class HomePage extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Itemsdesc('Sample Title',
-                                  'This is a description.', '19.99', 'assets/product1.jpg'),),
+                          MaterialPageRoute(
+                            builder: (context) => Itemsdesc(
+                                'Sample Title',
+                                'This is a description.',
+                                '19.99',
+                                'assets/product1.jpg'),
+                          ),
                         ); // danata mekata damme
                       },
                       borderRadius: BorderRadius.circular(
@@ -184,8 +225,10 @@ class HomePage extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Itemsdesc('Sample Title',
-                                  'This is a description.', '19.99', ''),),
+                          MaterialPageRoute(
+                            builder: (context) => Itemsdesc('Sample Title',
+                                'This is a description.', '19.99', ''),
+                          ),
                         ); // danata mekata damme
                       },
                       borderRadius: BorderRadius.circular(
@@ -200,8 +243,10 @@ class HomePage extends StatelessWidget {
                       onTap: () {
                         Navigator.push(
                           context,
-                          MaterialPageRoute(builder: (context) => Itemsdesc('Sample Title',
-                                  'This is a description.', '19.99', ''),),
+                          MaterialPageRoute(
+                            builder: (context) => Itemsdesc('Sample Title',
+                                'This is a description.', '19.99', ''),
+                          ),
                         ); // danata mekata damme
                       },
                       borderRadius: BorderRadius.circular(
@@ -245,7 +290,7 @@ class HomePage extends StatelessWidget {
             ),
             IconButton(
               icon: const Icon(
-                Icons.settings,
+                Icons.account_circle,
                 color: Color(0xFF199A8E),
               ),
               onPressed: () {

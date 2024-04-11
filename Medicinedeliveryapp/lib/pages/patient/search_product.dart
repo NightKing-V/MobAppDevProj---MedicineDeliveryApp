@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/components/product_card.dart';
 import 'package:medicinedeliveryapp/controllers/productsController.dart';
+import 'package:medicinedeliveryapp/pages/patient/patient_store.dart';
+import 'package:medicinedeliveryapp/pages/patient/profile.dart';
 
 class SearchProduct extends StatefulWidget {
   const SearchProduct({super.key});
@@ -83,6 +85,44 @@ class _SearchProductState extends State<SearchProduct> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(
+                Icons.home,
+                color: Color(0xFF199A8E),
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.medication,
+                color: Color(0xFF199A8E),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProductStore()),
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.account_circle,
+                color: Color(0xFF199A8E),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Profile()),
+                ); // Handle settings button press
+              },
+            ),
+          ],
+        ),
       ),
     );
   }

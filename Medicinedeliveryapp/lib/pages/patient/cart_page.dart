@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/controllers/cartController.dart';
 import 'package:medicinedeliveryapp/models/cart_model.dart';
+import 'package:medicinedeliveryapp/pages/patient/patient_store.dart';
+import 'package:medicinedeliveryapp/pages/patient/profile.dart';
 
 void main() {
   runApp(const MyApp());
@@ -35,7 +37,8 @@ class _CartGridState extends State<CartGrid> {
   Future<void> deleteItem(String itemId) async {
     await deleteFromCart(context, itemId);
     setState(() {
-      futureCart = getCart(context) as Future<List<Cart>>; // Re-fetch or adjust your list accordingly
+      futureCart = getCart(context)
+          as Future<List<Cart>>; // Re-fetch or adjust your list accordingly
     });
   }
 
@@ -49,6 +52,7 @@ class _CartGridState extends State<CartGrid> {
         ),
         centerTitle: true,
       ),
+      
       body: Center(
         child: FutureBuilder<List<Cart>>(
           future: futureCart,
@@ -90,6 +94,44 @@ class _CartGridState extends State<CartGrid> {
               return const Text("No data available");
             }
           },
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(
+                Icons.home,
+                color: Color(0xFF199A8E),
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.medication,
+                color: Color(0xFF199A8E),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProductStore()),
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.account_circle,
+                color: Color(0xFF199A8E),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Profile()),
+                ); // Handle settings button press
+              },
+            ),
+          ],
         ),
       ),
     );

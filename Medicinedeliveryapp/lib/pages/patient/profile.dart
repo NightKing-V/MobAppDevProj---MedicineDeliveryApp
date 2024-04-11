@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/models/authModel.dart';
 import 'package:medicinedeliveryapp/pages/patient/cart_page.dart';
+import 'package:medicinedeliveryapp/pages/patient/patient_store.dart';
 import 'package:provider/provider.dart';
 // import 'package:medicinedeliveryapp/pages/pharmacist/product_store.dart';
 
@@ -141,6 +142,44 @@ class Profile extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+          ],
+        ),
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(
+                Icons.home,
+                color: Color(0xFF199A8E),
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.medication,
+                color: Color(0xFF199A8E),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProductStore()),
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.account_circle,
+                color: Color(0xFF199A8E),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Profile()),
+                ); // Handle settings button press
+              },
             ),
           ],
         ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:medicinedeliveryapp/components/product_card.dart';
 import 'package:medicinedeliveryapp/controllers/cartController.dart';
 import 'package:medicinedeliveryapp/controllers/productsController.dart';
+import 'package:medicinedeliveryapp/pages/patient/profile.dart';
 import 'package:medicinedeliveryapp/pages/patient/search_product.dart';
 
 void main() {
@@ -96,6 +97,44 @@ class _ProductStoreState extends State<ProductStore> {
             ),
           ),
         ],
+      ),
+      bottomNavigationBar: BottomAppBar(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            IconButton(
+              icon: const Icon(
+                Icons.home,
+                color: Color(0xFF199A8E),
+              ),
+              onPressed: () {},
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.medication,
+                color: Color(0xFF199A8E),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ProductStore()),
+                );
+              },
+            ),
+            IconButton(
+              icon: const Icon(
+                Icons.account_circle,
+                color: Color(0xFF199A8E),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Profile()),
+                ); // Handle settings button press
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
