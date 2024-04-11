@@ -32,6 +32,13 @@ class _CartGridState extends State<CartGrid> {
     futureCart = getCart(context) as Future<List<Cart>>;
   }
 
+  Future<void> deleteItem(String itemId) async {
+    await deleteFromCart(context, itemId);
+    setState(() {
+      futureCart = getCart(context) as Future<List<Cart>>; // Re-fetch or adjust your list accordingly
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +75,9 @@ class _CartGridState extends State<CartGrid> {
                             width: 50, height: 50)
                         : null,
                     trailing: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        deleteItem(item.product.id);
+                      },
                       icon: Icon(
                         Icons.delete,
                         color: Colors.red,

@@ -74,9 +74,28 @@ Future<List<Cart>> getCart(BuildContext context) async {
         .map<Cart>(
             (jsonItem) => Cart.fromJson(jsonItem as Map<String, dynamic>))
         .toList();
-    print(carts.length);
     return carts;
   } else {
     throw Exception('Failed to fetch cart data');
+  }
+}
+
+Future<void> deleteFromCart(BuildContext context, String productID) async {
+  final String apiUrl = API.API_URL + '/cart/remove/$productID';
+  final String accessToken = Provider.of<AuthModel>(context, listen: false).accessToken;
+
+  final headers = {
+    'Authorization': 'Bearer $accessToken',
+    'Content-Type': 'application/json',
+  };
+
+  final response = await http.delete(Uri.parse(apiUrl), headers: headers);
+
+  if (response.statusCode == 200) {
+    // Successfully deleted the order
+    print("Order deleted successfully");
+  } else {
+    // Handle error scenario
+    throw Exception('Failed to delete order');
   }
 }

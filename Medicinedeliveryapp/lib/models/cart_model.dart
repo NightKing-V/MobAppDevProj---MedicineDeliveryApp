@@ -53,12 +53,14 @@ class Item {
 }
 
 class Product {
+    String id;
     String name;
     double price;
     List<String> images;
     String pharmacyId;
 
     Product({
+        required this.id,
         required this.name,
         required this.price,
         required this.images,
@@ -66,6 +68,7 @@ class Product {
     });
 
     factory Product.fromJson(Map<String, dynamic> json) => Product(
+        id: json["_id"],
         name: json["name"],
         price: json["price"]?.toDouble(),
         images: List<String>.from(json["images"].map((x) => x)),
@@ -73,6 +76,7 @@ class Product {
     );
 
     Map<String, dynamic> toJson() => {
+        "id": id,
         "name": name,
         "price": price,
         "images": List<dynamic>.from(images.map((x) => x)),
