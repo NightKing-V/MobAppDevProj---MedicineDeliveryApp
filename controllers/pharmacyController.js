@@ -6,82 +6,30 @@ const mongoose = require('mongoose');
 //@route POST /api/pharmacy/register
 //@access private
 const registerPharmacy = asyncHandler(async (req, res) => {
-
-  const imagePath = req.file ? req.file.path : undefined;
-  if(req.user.role != "pharmacist"){
-    return res.status(403).json({success:false,message:"not a pharmacist"});
-  }
-
-  let address, geoLocation;
   try {
-    address = JSON.parse(req.body.address);
-    geoLocation = JSON.parse(req.body.geoLocation);
-  } catch (e) {
-    return res.status(400).json({ success: false, message: "Invalid address or geoLocation format." });
-  }
+    const { pharmacyName, description, address, owner, licenseNumber, delivery } = req.body;
+    console.log(req.body)
+    // Check if required fields are provided
+    if (!pharmacyName || !description || !address || !owner || !licenseNumber || !delivery) {
+      return res.status(400).json({ success: false, message: "Missing required fields." });
+    }
 
-  const { street, city, state, zipCode } = address;
-  const { lat, lng } = geoLocation;
+    // Create a new pharmacy object using the Pharmacy model
+    const newPharmacy = new Pharmacy({
+      pharmacyName,
+      description,
+      address,
+      owner,
+      ownerID: req.user.id,
+      licenseNumber,
+      delivery,
+    });
 
-  const {
-    pharmacyName,
-    description,
-    owner,
-    licenseNumber,
-    delivery,
-  } = req.body;
-
-  if (
-    !pharmacyName ||
-    !description ||
-    !street ||
-    !city ||
-    !state ||
-    !zipCode ||
-    !lat ||
-    !lng ||
-    !imagePath ||
-    !owner ||
-    !licenseNumber ||
-    !delivery 
-  ) {
-    return res
-      .status(400)
-      .json({ success: false, message: "Please provide all required fields." });
-  }
-
-  const existingPharmacy = await Pharmacy.findOne({ licenseNumber });
-  if (existingPharmacy) {
-    return res
-      .status(400)
-      .json({
-        success: false,
-        message: "Pharmacy with this license number already exists.",
-      });
-  }
-  
-  // Create pharmacy
-  const newPharmacy = new Pharmacy({
-    pharmacyName,
-    description,
-    address: { street, city, state, zipCode },
-    geoLocation: { lat, lng },
-    images: [imagePath],
-    owner,
-    ownerID: req.user.id,
-    licenseNumber,
-    delivery,
-  });
-  
-  try {
-    var savedPharmacy = await newPharmacy.save();
-    savedPharmacy.images = savedPharmacy.images.map(image=>{
-      const encodedPath = image.split('\\').map(encodeURIComponent).join('/');
-      return process.env.FILE_HOST + encodedPath;
-    } ) 
+    // Save the pharmacy to the database
+    const savedPharmacy = await newPharmacy.save();
     res.status(201).json({ success: true, data: savedPharmacy });
   } catch (error) {
-    res.status(400).json({ success: false, message: error.message });
+    res.status(500).json({ success: false, message: error.message });
   }
 });
 

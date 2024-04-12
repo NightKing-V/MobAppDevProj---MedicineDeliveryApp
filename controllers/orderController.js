@@ -63,7 +63,6 @@ const deleteOrderByID = asyncHandler(async(req,res)=>{
 const changeOrderState = asyncHandler(async(req,res)=>{
     const recordID = req.params.id;
     const {status} = req.body;
-    console.log("ji")
     try {
         const updatedDoc = await Order.findByIdAndUpdate(
             recordID,

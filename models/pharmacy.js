@@ -35,12 +35,13 @@ const pharmacySchema = new Schema(
       },
     },
     geoLocation: {
-      lat: Number,
-      lng: Number,
+      lat: { type: Number, default: 10 },
+      lng: { type: Number, default: 10 }
     },
     images: {
       type: [String],
       required: true,
+      default: ['https://example.com/placeholder.jpg']
     },
     owner: {
       type: String,
@@ -59,6 +60,7 @@ const pharmacySchema = new Schema(
     delivery: {
       type: String,
       required: true,
+      default:'Yes'
     },
   },
   { timestamps: true, versionKey:false }

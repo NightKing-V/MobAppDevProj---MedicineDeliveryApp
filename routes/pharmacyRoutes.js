@@ -6,12 +6,18 @@ const validateToken = require("../middlewares/validateTokenHandler");
 
 const router = express.Router();
 
+// router.post(
+//   "/register",
+//   validateToken,
+//   PhrmacyimageUpload.single("image"),
+//   registerPharmacy
+// );
 router.post(
   "/register",
   validateToken,
-  PhrmacyimageUpload.single("image"),
   registerPharmacy
 );
+
 router.get('/all',validateToken,getAllPharmacies);
 router.get('/:id',validateToken,getPharmacyById);
 
