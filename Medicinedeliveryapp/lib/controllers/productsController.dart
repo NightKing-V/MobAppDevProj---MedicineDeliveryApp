@@ -15,11 +15,9 @@ Future<List<dynamic>> getAllProducts(BuildContext context, String? query) async 
   final response = await http.get(Uri.parse(apiUrl), headers: headers);
   if (response.statusCode == 200) {
     final List<dynamic> allData = jsonDecode(response.body)['data'];
-
-    // If there's a query, filter the products, otherwise return all products
+    
     if (query != null && query.isNotEmpty) {
       final filteredData = allData.where((product) {
-        // Assuming 'title' is a key in your product map. Adjust if necessary.
         final title = product['name'] as String? ?? '';
         return title.toLowerCase().contains(query.toLowerCase());
       }).toList();

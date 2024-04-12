@@ -4,7 +4,6 @@ import 'package:medicinedeliveryapp/pages/authentication/login_page.dart';
 import 'package:medicinedeliveryapp/pages/patient/cart_page.dart';
 import 'package:medicinedeliveryapp/pages/patient/patient_store.dart';
 import 'package:provider/provider.dart';
-// import 'package:medicinedeliveryapp/pages/pharmacist/product_store.dart';
 
 class Profile extends StatelessWidget {
   @override
@@ -25,7 +24,7 @@ class Profile extends StatelessWidget {
             ),
             SizedBox(height: 20.0),
             Text(
-              Provider.of<AuthModel>(context).username, // Replace with username
+              Provider.of<AuthModel>(context).username, 
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
             SizedBox(height: 20.0),
@@ -35,7 +34,7 @@ class Profile extends StatelessWidget {
                 children: [
                   Row(
                     mainAxisAlignment:
-                        MainAxisAlignment.center, // Align content to the left
+                        MainAxisAlignment.center, 
                     children: [
                       ElevatedButton.icon(
                         onPressed: () {
@@ -55,7 +54,7 @@ class Profile extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10.0), // Spacing between button and text
+                      SizedBox(width: 10.0),
                     ],
                   ),
                   Row(
@@ -79,7 +78,7 @@ class Profile extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10.0), // Spacing between button and text
+                      SizedBox(width: 10.0),
                     ],
                   ),
                   Row(
@@ -103,7 +102,7 @@ class Profile extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10.0), // Spacing between button and text
+                      SizedBox(width: 10.0),
                     ],
                   ),
                   Row(
@@ -128,7 +127,7 @@ class Profile extends StatelessWidget {
                           ),
                         ),
                       ),
-                      SizedBox(width: 10.0), // Spacing between button and text
+                      SizedBox(width: 10.0),
                     ],
                   ),
                 ],
@@ -169,7 +168,7 @@ class Profile extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Profile()),
-                ); // Handle settings button press
+                );
               },
             ),
           ],

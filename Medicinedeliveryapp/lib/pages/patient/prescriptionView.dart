@@ -53,13 +53,13 @@ class _PrescriptionViewPatientState extends State<PrescriptionViewPatient> {
 void deletePrescription() async {
     try {
       await deleteFromPrescription(context, widget.id);
-      // On successful deletion, replace the current route with the Prescriptions page
+     
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => PrescriptionPage()),
       );
     } catch (e) {
-      // If there's an error, you might want to show an error message
+     
       showDialog(
         context: context,
         builder: (ctx) => AlertDialog(
@@ -68,7 +68,7 @@ void deletePrescription() async {
           actions: <Widget>[
             TextButton(
               onPressed: () {
-                Navigator.of(ctx).pop(); // Dismiss the dialog
+                Navigator.of(ctx).pop(); 
               },
               child: Text('OK'),
             ),
@@ -159,19 +159,16 @@ void deletePrescription() async {
             Padding(
   padding: const EdgeInsets.only(top: 30, bottom: 30),
   child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Use spaceEvenly for equal spacing
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
       
       ElevatedButton.icon(
         onPressed: deletePrescription,
-          // Navigator.push(
-          //         context,
-          //         MaterialPageRoute(builder: (context) => PrescriptionPage()),
-          //       );
-        icon: Icon(Icons.delete, color: Colors.white), // X mark icon
+        
+        icon: Icon(Icons.delete, color: Colors.white),
         label: Text("Delete"),
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white, backgroundColor: Colors.red, // Set the text color to white
+          foregroundColor: Colors.white, backgroundColor: Colors.red, 
         ),
       ),
     ],

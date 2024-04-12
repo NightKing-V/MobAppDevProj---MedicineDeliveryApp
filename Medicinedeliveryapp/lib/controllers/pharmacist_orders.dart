@@ -17,7 +17,6 @@ Future<List<dynamic>> fetchAllOrdersByPharmacy(BuildContext context) async {
 
   if (response.statusCode == 200) {
     final List<dynamic> data = jsonDecode(response.body)['data'];
-    // print(data);
     return data;
   } else {
     throw Exception('Failed to fetch data');
@@ -48,8 +47,6 @@ Future<void> changeState(BuildContext context, String orderID) async {
 
     if (response.statusCode == 200) {
       print("order state changed");
-      // Optionally process the response data if needed
-      // final data = jsonDecode(response.body);
     } else {
       print('Failed to change order state: Status Code ${response.statusCode}');
       print('Response Body: ${response.body}');
@@ -85,8 +82,6 @@ Future<void> completeOrder(BuildContext context, String orderID) async {
 
     if (response.statusCode == 200) {
       print("order state changed");
-      // Optionally process the response data if needed
-      // final data = jsonDecode(response.body);
     } else {
       print('Failed to change order state: Status Code ${response.statusCode}');
       print('Response Body: ${response.body}');
@@ -111,10 +106,8 @@ Future<void> deleteOrderById(BuildContext context, String orderId) async {
   final response = await http.delete(Uri.parse(apiUrl), headers: headers);
 
   if (response.statusCode == 200) {
-    // Successfully deleted the order
     print("Order deleted successfully");
   } else {
-    // Handle error scenario
     throw Exception('Failed to delete order');
   }
 }

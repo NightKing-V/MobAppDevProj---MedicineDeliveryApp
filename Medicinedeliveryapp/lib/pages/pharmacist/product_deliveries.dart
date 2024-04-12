@@ -21,7 +21,6 @@ class MyDeliveries extends StatefulWidget {
 }
 
 class _MyDeliveriesState extends State<MyDeliveries> {
-  // This function simulates fetching data from a network.
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,7 @@ class _MyDeliveriesState extends State<MyDeliveries> {
           IconButton(
             icon: Icon(Icons.notification_important_rounded),
             onPressed: () {
-              // Handle notification icon press
+           
             },
           ),
         ],
@@ -63,7 +62,7 @@ class _MyDeliveriesState extends State<MyDeliveries> {
                     return ListView.builder(
                       shrinkWrap: true,
                       physics:
-                          NeverScrollableScrollPhysics(), // to disable ListView's own scrolling
+                          NeverScrollableScrollPhysics(),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         var product = snapshot.data![index];
@@ -71,7 +70,7 @@ class _MyDeliveriesState extends State<MyDeliveries> {
                           padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
                           child: SizedBox(
                             width: double.infinity,
-                            // Use a ternary operator for conditional widget rendering
+             
                             child: product['status'] == "delivering" || product['status'] == "deliverd"
                                 ? ExpandedCard(
                                     firstName: product['userID']['firstName'],
@@ -85,7 +84,7 @@ class _MyDeliveriesState extends State<MyDeliveries> {
                                     onDelete: () {
                                       setState(() {
                                         var productToRemove = snapshot.data![
-                                            index]; // Capture the product before removal
+                                            index]; 
                                         print(productToRemove['_id']);
                                         deleteOrderById(
                                             context, productToRemove['_id']);
@@ -97,7 +96,7 @@ class _MyDeliveriesState extends State<MyDeliveries> {
                                           snapshot.data![index]['_id']);
                                     },
                                   )
-                                : Container(), // You can decide what to show when status is not "processing"
+                                : Container(), 
                           ),
                         );
                       },

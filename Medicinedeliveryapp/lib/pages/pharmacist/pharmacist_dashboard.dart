@@ -40,22 +40,17 @@ class PharmacistDashboard extends StatelessWidget {
           IconButton(
             icon: Icon(Icons.notification_important_rounded),
             onPressed: () {
-              // Navigator.push(
-              //                 context,
-              //                 MaterialPageRoute(
-              //                     builder: (context) => Product()),
-              //               );
             },
           ),
         ],
-        // Add padding to the top and bottom of the AppBar
+      
         toolbarHeight: kToolbarHeight + 20.0,
       ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              SizedBox(height: 10.0), // Padding at the top
+              SizedBox(height: 10.0),
               Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -67,7 +62,7 @@ class PharmacistDashboard extends StatelessWidget {
                         height: 150,
                         decoration: BoxDecoration(
                             color: Colors
-                                .blue, // Specify the background color for the container
+                                .blue,
                             borderRadius: BorderRadius.circular(20)),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -114,27 +109,27 @@ class PharmacistDashboard extends StatelessWidget {
                       ),
                     ),
                   ]),
-              // Constrain the height of the GridView
+             
               Container(
-                height: 350, // Specify a fixed height for the GridView
+                height: 350,
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20.0, left: 30,right: 30),
                   child: GridView.count(
                     crossAxisCount: 2,
                     childAspectRatio:
-                        3 / 2, // Adjust the size ratio of the grid items
-                    crossAxisSpacing: 5, // Horizontal space between items
-                    mainAxisSpacing: 5, // Vertical space between items
+                        3 / 2,
+                    crossAxisSpacing: 5,
+                    mainAxisSpacing: 5,
                     shrinkWrap:
-                        true, // Important to let GridView know to constrain its content
+                        true,
                     physics:
-                        NeverScrollableScrollPhysics(), // To prevent GridView from scrolling
+                        NeverScrollableScrollPhysics(),
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: CardButton(
                           title: "My Products",
-                          icon: Icons.inventory, // Use Icon widget directly
+                          icon: Icons.inventory,
                           color: Colors.green,
                           onPressed: () {
                             print("Navigating to PharmacistDashboard");
@@ -150,7 +145,7 @@ class PharmacistDashboard extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: CardButton(
                           title: "My Orders",
-                          icon: Icons.list_alt, // Use Icon widget directly
+                          icon: Icons.list_alt,
                           color: Colors.blue,
                           onPressed: () {
                             print("Navigating to PharmacistDashboard");
@@ -167,7 +162,7 @@ class PharmacistDashboard extends StatelessWidget {
                         child: CardButton(
                           title: "My Deliveries",
                           icon:
-                              Icons.local_shipping, // Use Icon widget directly
+                              Icons.local_shipping,
                           color: Colors.orange,
                           onPressed: () {
                             print("Navigating to PharmacistDashboard");
@@ -183,7 +178,7 @@ class PharmacistDashboard extends StatelessWidget {
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: CardButton(
                           title: "Prescriptions",
-                          icon: Icons.chat, // Use Icon widget directly
+                          icon: Icons.chat,
                           color: Colors.pink,
                           onPressed: () {
                             print("Navigating to PharmacistDashboard");
@@ -243,7 +238,7 @@ class PharmacistDashboard extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.library_books_rounded,color: Colors.green,),
               onPressed: () {
-                // Handle search button press
+               
               },
             ),
             IconButton(

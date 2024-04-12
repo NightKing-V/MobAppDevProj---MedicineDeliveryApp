@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 String formatDateString(String dateString) {
   DateTime dateTime = DateTime.parse(dateString);
 
-  // Construct a formatted date string
   String formattedDate =
       "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')}";
 

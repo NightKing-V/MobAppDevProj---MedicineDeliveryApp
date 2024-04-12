@@ -48,20 +48,17 @@ class _AddProductState extends State<AddProduct> {
       imageFile: File(_imageFile!.path),
     );
 
-    // Show a snackbar or any other notification that the product has been submitted
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Product submitted successfully')),
     );
   } else {
-    // Handle the case where the image is not picked
+  
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('Please pick an image for the product')),
     );
   }
 }
 
-
-  // Text field controllers for input management
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
@@ -72,9 +69,9 @@ class _AddProductState extends State<AddProduct> {
   final TextEditingController _manufactureController = TextEditingController();
   final TextEditingController _expiryDateController = TextEditingController();
 
-  // Image picker and selected image state
+
   final ImagePicker _picker = ImagePicker();
-  XFile? _imageFile; // Store selected image
+  XFile? _imageFile;
 
   Future<void> _getImage() async {
     final XFile? pickedFile = await _picker.pickImage(source: ImageSource.gallery);
@@ -90,13 +87,13 @@ class _AddProductState extends State<AddProduct> {
         title: Text('Add Product',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
         centerTitle: true,
       ),
-      body: SingleChildScrollView( // Allow scrolling for long forms
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(20.0),
         child: Form(
-          key: _formKey, // Assign form key
+          key: _formKey,
           child: Column(
             children: [
-              // Text fields for product details
+             
               TextFormField(
                 controller: _nameController,
                 decoration: InputDecoration(
@@ -117,7 +114,7 @@ class _AddProductState extends State<AddProduct> {
                   labelText: 'Description',
                   border: OutlineInputBorder(),
                 ),
-                maxLines: 2, // Allow multiple lines for description
+                maxLines: 2,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a product description';
@@ -128,7 +125,7 @@ class _AddProductState extends State<AddProduct> {
               const SizedBox(height: 10.0),
               TextFormField(
                 controller: _priceController,
-                keyboardType: TextInputType.number, // Set keyboard type for numbers
+                keyboardType: TextInputType.number,
                 decoration: InputDecoration(
                   labelText: 'Price',
                   border: OutlineInputBorder(),
@@ -226,7 +223,7 @@ class _AddProductState extends State<AddProduct> {
                 },
               ),
               const SizedBox(height: 20.0),
-              // Display selected image
+           
               if (_imageFile != null)
                 Image.file(
                   File(_imageFile!.path),
@@ -238,7 +235,7 @@ class _AddProductState extends State<AddProduct> {
                  ElevatedButton(
                 onPressed: _getImage,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.green, // Button color
+                  backgroundColor: Colors.green,
                 ),
                 child: 
                   Icon(Icons.photo_camera,color: Colors.white,),
@@ -253,7 +250,7 @@ class _AddProductState extends State<AddProduct> {
                  uploadProductData(); 
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue, // Button color
+                  backgroundColor: Colors.blue,
                 ),
                 child: Text('Add Product',style: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),),
               ),

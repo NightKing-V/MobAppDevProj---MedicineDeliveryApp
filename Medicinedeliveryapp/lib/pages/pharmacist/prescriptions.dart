@@ -31,17 +31,10 @@ class _PrescriptionsPageState extends State<PrescriptionsPage> {
     futureCart = getPrescriptions(context) as Future<List<Prescription>>;
   }
 
-  // Future<void> deleteItem(String itemId) async {
-  //   await deleteFromCart(context, itemId);
-  //   setState(() {
-  //     futureCart = getCart(context)
-  //         as Future<List<Cart>>; // Re-fetch or adjust your list accordingly
-  //   });
-  // }
   Future<void> deleteItem(String itemId) async {
     setState(() {
       futureCart = getPrescriptions(context) as Future<
-          List<Prescription>>; // Re-fetch or adjust your list accordingly
+          List<Prescription>>;
     });
   }
 
@@ -69,13 +62,13 @@ class _PrescriptionsPageState extends State<PrescriptionsPage> {
               return ListView.builder(
                 itemCount: allItems.length,
                 itemBuilder: (context, index) {
-                  // Access the current item.
+            
                   final item = allItems[index];
-                  // Now, you can use `item.product.name` and other properties.
+             
                   return Card(
                     child: InkWell(
                       onTap: () {
-                        // Navigate to new page
+                   
                         Navigator.push(
                           context,
                           MaterialPageRoute(
@@ -88,7 +81,7 @@ class _PrescriptionsPageState extends State<PrescriptionsPage> {
                                     state: item.userId.address.state,
                                     city: item.userId.address.city,
                                     zipCode: item.userId.address.zipCode,
-                                  )), // Replace NewPage with your target page
+                                  )),
                         );
                       },
                       child: Row(
@@ -100,7 +93,7 @@ class _PrescriptionsPageState extends State<PrescriptionsPage> {
                             child: Image.network(item.prescriptionImage),
                           ),
                           Expanded(
-                            // Expanded used to fill the available space in Row
+                        
                             child: Column(
                               mainAxisAlignment: MainAxisAlignment.start,
                               crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,7 +115,7 @@ class _PrescriptionsPageState extends State<PrescriptionsPage> {
                           ),
                           IconButton(
                             onPressed: () {
-                              // Your icon button tap functionality
+                       
                               print('IconButton tapped');
                             },
                             icon: Icon(Icons.check, color: Colors.green),

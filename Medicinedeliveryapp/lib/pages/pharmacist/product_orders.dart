@@ -21,7 +21,6 @@ class MyOrders extends StatefulWidget {
 }
 
 class _MyOrdersState extends State<MyOrders> {
-  // This function simulates fetching data from a network.
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +34,7 @@ class _MyOrdersState extends State<MyOrders> {
           IconButton(
             icon: Icon(Icons.search),
             onPressed: () {
-              // Handle notification icon press
+        
             },
           ),
         ],
@@ -63,7 +62,7 @@ class _MyOrdersState extends State<MyOrders> {
                     return ListView.builder(
                       shrinkWrap: true,
                       physics:
-                          NeverScrollableScrollPhysics(), // to disable ListView's own scrolling
+                          NeverScrollableScrollPhysics(),
                       itemCount: snapshot.data!.length,
                       itemBuilder: (context, index) {
                         var product = snapshot.data![index];
@@ -71,7 +70,7 @@ class _MyOrdersState extends State<MyOrders> {
                           padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
                           child: SizedBox(
                             width: double.infinity,
-                            // Use a ternary operator for conditional widget rendering
+                      
                             child: product['status'] == "processing"
                                 ? ExpandedCard(
                                     firstName: product['userID']['firstName'],
@@ -85,7 +84,7 @@ class _MyOrdersState extends State<MyOrders> {
                                     onDelete: () {
                                       setState(() {
                                         var productToRemove = snapshot.data![
-                                            index]; // Capture the product before removal
+                                            index];
                                         print(productToRemove['_id']);
                                         deleteOrderById(
                                             context, productToRemove['_id']);
@@ -97,7 +96,7 @@ class _MyOrdersState extends State<MyOrders> {
                                           snapshot.data![index]['_id']);
                                     },
                                   )
-                                : Container(), // You can decide what to show when status is not "processing"
+                                : Container(),
                           ),
                         );
                       },

@@ -112,17 +112,16 @@ class _PrescriptionViewState extends State<PrescriptionView> {
             Padding(
   padding: const EdgeInsets.only(top: 30, bottom: 30),
   child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly, // Use spaceEvenly for equal spacing
+    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
     children: [
       ElevatedButton.icon(
         onPressed: () {
-          // Implement what happens when the delivery is confirmed
           print("Delivery Confirmed");
         },
-        icon: Icon(Icons.local_shipping, color: Colors.white), // Lorry icon
+        icon: Icon(Icons.local_shipping, color: Colors.white), 
         label: Text("Confirm"),
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white, backgroundColor: Colors.green, // Set the text color to white
+          foregroundColor: Colors.white, backgroundColor: Colors.green, 
         ),
       ),
       ElevatedButton.icon(
@@ -130,10 +129,10 @@ class _PrescriptionViewState extends State<PrescriptionView> {
           Navigator.pop(context);
           print("Cancel Action");
         },
-        icon: Icon(Icons.cancel, color: Colors.white), // X mark icon
+        icon: Icon(Icons.cancel, color: Colors.white), 
         label: Text("Cancel"),
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white, backgroundColor: Colors.red, // Set the text color to white
+          foregroundColor: Colors.white, backgroundColor: Colors.red,
         ),
       ),
     ],

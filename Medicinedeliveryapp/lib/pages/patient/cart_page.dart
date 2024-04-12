@@ -38,7 +38,7 @@ class _CartGridState extends State<CartGrid> {
     await deleteFromCart(context, itemId);
     setState(() {
       futureCart = getCart(context)
-          as Future<List<Cart>>; // Re-fetch or adjust your list accordingly
+          as Future<List<Cart>>;
     });
   }
 
@@ -60,16 +60,13 @@ class _CartGridState extends State<CartGrid> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
             } else if (snapshot.hasData) {
-              // Flatten all items from all carts into a single list.
               final allItems =
                   snapshot.data!.expand((cart) => cart.items).toList();
 
               return ListView.builder(
                 itemCount: allItems.length,
                 itemBuilder: (context, index) {
-                  // Access the current item.
                   final item = allItems[index];
-                  // Now, you can use `item.product.name` and other properties.
                   return ListTile(
                     title: Text(item.product.name),
                     subtitle: Text(
@@ -128,7 +125,7 @@ class _CartGridState extends State<CartGrid> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Profile()),
-                ); // Handle settings button press
+                );
               },
             ),
           ],

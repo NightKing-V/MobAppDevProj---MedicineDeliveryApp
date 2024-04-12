@@ -1,9 +1,12 @@
 import 'dart:convert';
+import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
+import 'package:http_parser/http_parser.dart';
 import 'package:medicinedeliveryapp/models/authModel.dart';
 import 'package:medicinedeliveryapp/models/config.dart';
 import 'package:medicinedeliveryapp/models/prescription_model.dart';
+import 'package:mime/mime.dart';
 import 'package:provider/provider.dart';
 
 Future<List<Prescription>> getPrescriptions(BuildContext context) async {
@@ -52,7 +55,8 @@ Future<List<Prescription>> getPrescriptionsByUser(BuildContext context) async {
 
 Future<void> deleteFromPrescription(BuildContext context, String id) async {
   final String apiUrl = API.API_URL + '/prescriptions/delete/$id';
-  final String accessToken = Provider.of<AuthModel>(context, listen: false).accessToken;
+  final String accessToken =
+      Provider.of<AuthModel>(context, listen: false).accessToken;
 
   final headers = {
     'Authorization': 'Bearer $accessToken',
@@ -62,10 +66,55 @@ Future<void> deleteFromPrescription(BuildContext context, String id) async {
   final response = await http.delete(Uri.parse(apiUrl), headers: headers);
 
   if (response.statusCode == 200) {
-    // Successfully deleted the order
     print("Order deleted successfully");
   } else {
-    // Handle error scenario
     throw Exception('Failed to delete order');
+  }
+}
+
+Future<String> uploadPrescription({
+  required BuildContext context,
+  required File imageFile,
+}) async {
+  final String apiUrl = API.API_URL + '/prescriptions/place';
+  final String accessToken =
+      Provider.of<AuthModel>(context, listen: false).accessToken;
+
+  final headers = {
+    'Content-Type': 'multipart/form-data',
+    'Authorization': 'Bearer $accessToken',
+  };
+
+  final uri = Uri.parse(apiUrl);
+
+  try {
+    var request = http.MultipartRequest('POST', uri)..headers.addAll(headers);
+    final mimeTypeData =
+        lookupMimeType(imageFile.path, headerBytes: [0xFF, 0xD8])?.split('/');
+
+    var picture = await http.MultipartFile.fromPath(
+      'image',
+      imageFile.path,
+      contentType: mimeTypeData != null
+          ? MediaType(mimeTypeData[0], mimeTypeData[1])
+          : null,
+    );
+
+    request.files.add(picture);
+
+    // Send the request
+    var response = await request.send();
+
+    if (response.statusCode == 200) {
+      print('Prescription uploaded successfully.');
+      return "done";
+    } else {
+      print(
+          'Failed to upload Prescription. Status code: ${response.statusCode}');
+      return "failed";
+    }
+  } catch (e) {
+    print('Error uploading product: $e');
+    return "failed";
   }
 }

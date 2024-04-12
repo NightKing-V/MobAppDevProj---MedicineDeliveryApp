@@ -4,12 +4,10 @@ import 'package:http/http.dart' as http;
 import 'package:medicinedeliveryapp/models/authModel.dart';
 import 'package:medicinedeliveryapp/models/config.dart';
 import 'package:medicinedeliveryapp/models/product_model.dart';
-import 'package:medicinedeliveryapp/pages/authentication/login_page.dart';
 import 'package:provider/provider.dart';
 import 'dart:io';
 import 'package:mime/mime.dart';
 import 'package:http_parser/http_parser.dart';
-import 'package:path/path.dart' as path;
 
 Future<List<dynamic>> fetchAllProductsByPharmacy(BuildContext context) async {
   final String apiUrl = API.API_URL + '/products/allProductsPharmacy';
@@ -25,7 +23,6 @@ Future<List<dynamic>> fetchAllProductsByPharmacy(BuildContext context) async {
 
   if (response.statusCode == 200) {
     final List<dynamic> data = jsonDecode(response.body)['data'];
-    // print(data);
     return data;
   } else {
     throw Exception('Failed to fetch data');
@@ -44,7 +41,7 @@ Future<List<ProductItem>> getProducts(BuildContext context) async {
   final response = await http.get(Uri.parse(apiUrl), headers: headers);
 
   if (response.statusCode == 200) {
-    // Decode the JSON response into a List<dynamic>
+
     List jsonData = json.decode(response.body)['data'] as List;
     List<ProductItem> items = jsonData
         .map<ProductItem>(
@@ -68,16 +65,14 @@ Future<void> deleteFromProduct(BuildContext context, String productID) async {
   final response = await http.delete(Uri.parse(apiUrl), headers: headers);
 
   if (response.statusCode == 200) {
-    // Successfully deleted the order
     print("Order deleted successfully");
   } else {
-    // Handle error scenario
     throw Exception('Failed to delete order');
   }
 }
 
 Future<void> uploadProduct({
-  required BuildContext context, // Add BuildContext to access Provider
+  required BuildContext context, 
   required String name,
   required String description,
   required String price,
@@ -89,9 +84,8 @@ Future<void> uploadProduct({
   required String expiryDate,
   required File imageFile,
 }) async {
-  // Construct the API URL
+
   final String apiUrl = API.API_URL + '/products/add';
-  // Access the accessToken from the AuthModel provider
   final String accessToken =
       Provider.of<AuthModel>(context, listen: false).accessToken;
 
@@ -105,7 +99,6 @@ Future<void> uploadProduct({
   try {
     var request = http.MultipartRequest('POST', uri)..headers.addAll(headers);
 
-    // Add text fields to the request
     request.fields['name'] = name;
     request.fields['description'] = description;
     request.fields['price'] = price;
@@ -116,13 +109,10 @@ Future<void> uploadProduct({
     request.fields['manufacturer'] = manufacturer;
     request.fields['expiryDate'] = expiryDate;
 
-    // Determine the MIME type of the file
     final mimeTypeData =
         lookupMimeType(imageFile.path, headerBytes: [0xFF, 0xD8])?.split('/');
-
-    // Add the image file to the request
     var picture = await http.MultipartFile.fromPath(
-      'image', // Adjust the field name according to your API
+      'image',
       imageFile.path,
       contentType: mimeTypeData != null
           ? MediaType(mimeTypeData[0], mimeTypeData[1])

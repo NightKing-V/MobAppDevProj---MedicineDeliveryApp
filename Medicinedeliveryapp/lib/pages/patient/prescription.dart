@@ -22,8 +22,7 @@ class Prescription extends StatelessWidget {
               icon: Icon(Icons.upload),
               label: Text('Upload'),
               style: ElevatedButton.styleFrom(
-                // primary: Colors.green,
-                // onPrimary: Colors.white,
+             
               ),
             ),
             SizedBox(height: 20.0),
@@ -31,7 +30,7 @@ class Prescription extends StatelessWidget {
               onPressed: () {},
               child: Text('Clear'),
               style: TextButton.styleFrom(
-                // primary: Colors.red,
+               
               ),
             ),
           ],

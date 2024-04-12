@@ -15,7 +15,6 @@ class _SearchProductState extends State<SearchProduct> {
   String _searchQuery = '';
   List<dynamic> _searchResults = [];
 
-  // Call this function whenever the search query changes
   void _onSearchChanged(String query) {
     setState(() {
       _searchQuery = query;
@@ -23,7 +22,6 @@ class _SearchProductState extends State<SearchProduct> {
     _fetchSearchResults();
   }
 
-  // Fetch search results based on the current search query
   void _fetchSearchResults() async {
     if (_searchQuery.isNotEmpty) {
       final results = await getAllProducts(context, _searchQuery);
@@ -67,16 +65,16 @@ class _SearchProductState extends State<SearchProduct> {
                 return Container(
                   child: ProductCard(
                     imageUrl: product['images']
-                        [0], // Assuming first image in 'images' list
+                        [0], 
                     title: product['name'],
                     description: product['description'],
                     price: product['price'].toDouble(),
                     onAddToCart: () {
-                      // Implement your add to cart functionality here
+                     
                       print('Adding to cart');
                     },
                     onBuyNow: () {
-                      // Implement your buy now functionality here
+                      
                       print('Buying now');
                     },
                   ),
@@ -118,7 +116,7 @@ class _SearchProductState extends State<SearchProduct> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Profile()),
-                ); // Handle settings button press
+                );
               },
             ),
           ],

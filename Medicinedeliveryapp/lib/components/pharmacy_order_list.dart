@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 String formatDateTimeString(String dateTimeString) {
   DateTime dateTime = DateTime.parse(dateTimeString);
 
-  // Construct a formatted date string
   return "${dateTime.year}-${dateTime.month.toString().padLeft(2, '0')}-${dateTime.day.toString().padLeft(2, '0')} ${dateTime.hour.toString().padLeft(2, '0')}:${dateTime.minute.toString().padLeft(2, '0')}";
 }
 
@@ -52,11 +51,11 @@ class ExpandedCard extends StatelessWidget {
               children: [
                 IconButton(
                   icon: sicon,
-                  onPressed: () => onMove(), // Implement edit functionality here
+                  onPressed: () => onMove(),
                 ),
                 IconButton(
                   icon: Icon(Icons.delete, color: Colors.red),
-                  onPressed: () => onDelete(), // Pass the onDelete function
+                  onPressed: () => onDelete(),
                 ),
               ],
             ),

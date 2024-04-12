@@ -72,17 +72,17 @@ class _ProductStoreState extends State<ProductStore> {
                         padding: const EdgeInsets.only(top: 4.0, bottom: 4.0),
                         child: ProductCard(
                           imageUrl: product['images']
-                              [0], // Assuming first image in 'images' list
+                              [0], 
                           title: product['name'],
                           description: product['description'],
                           price: product['price'].toDouble(),
                           onAddToCart: () {
-                            // Implement your add to cart functionality here
+                           
                             print('Adding to cart');
                             addToCart(context, product['_id'], "1");
                           },
                           onBuyNow: () {
-                            // Implement your buy now functionality here
+                          
                             print('Buying now');
                           },
                         ),
@@ -130,7 +130,7 @@ class _ProductStoreState extends State<ProductStore> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Profile()),
-                ); // Handle settings button press
+                );
               },
             ),
           ],

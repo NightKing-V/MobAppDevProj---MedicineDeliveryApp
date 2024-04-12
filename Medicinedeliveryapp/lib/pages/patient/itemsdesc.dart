@@ -15,7 +15,7 @@ class Itemsdesc extends StatelessWidget {
         child: Column(
           children: [
             Center(
-              child: Image.asset(imgurl), // Replace with your image path
+              child: Image.asset(imgurl),
             ),
             Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -36,7 +36,7 @@ class Itemsdesc extends StatelessWidget {
                 ])),
             Padding(
               padding:
-                  const EdgeInsets.all(10.0), // Adjust padding values as needed
+                  const EdgeInsets.all(10.0),
               child: ElevatedButton(
                 onPressed: () {},
                 child:
@@ -45,7 +45,7 @@ class Itemsdesc extends StatelessWidget {
             ),
             Padding(
               padding:
-                  const EdgeInsets.all(10.0), // Adjust padding values as needed
+                  const EdgeInsets.all(10.0),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(

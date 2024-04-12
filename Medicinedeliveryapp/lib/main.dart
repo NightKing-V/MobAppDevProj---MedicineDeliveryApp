@@ -54,8 +54,8 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
             // Image at the center
             Image.asset(
               'assets/laptop.png',
-              width: 300.0, // Adjust the width as needed
-              height: 300.0, // Adjust the height as needed
+              width: 300.0, 
+              height: 300.0,
             ),
             // Loading circle below the image
             SizedBox(height: 20.0),

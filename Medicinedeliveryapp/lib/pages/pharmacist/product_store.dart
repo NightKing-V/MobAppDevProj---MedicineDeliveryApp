@@ -53,17 +53,17 @@ Widget build(BuildContext context) {
       ),
       centerTitle: true,
     ),
-    body: Column( // Use Column to layout the button and the FutureBuilder
+    body: Column(
       children: [
         Padding(
-          padding: const EdgeInsets.all(8.0), // Add some padding around the button
+          padding: const EdgeInsets.all(8.0), 
           child: Align(
-            alignment: Alignment.centerLeft, // Align the button to the right
+            alignment: Alignment.centerLeft,
             child: ElevatedButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => AddProduct()), // Navigate to your AddProductPage when the button is pressed
+                  MaterialPageRoute(builder: (context) => AddProduct()), 
                 );
               },
               child: Container(
@@ -73,13 +73,13 @@ Widget build(BuildContext context) {
                 ),
               ),
               style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.green, // Use your theme color
+                backgroundColor: Colors.green, 
               ),
             ),
           ),
         ),
         SizedBox(height: 20,),
-        Expanded( // Use Expanded to fill the remaining space with the FutureBuilder
+        Expanded(
           child: Center(
             child: FutureBuilder<List<ProductItem>>(
               future: futureCart,
@@ -143,7 +143,7 @@ Widget build(BuildContext context) {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Profile()),
-                ); // Handle settings button press
+                );
               },
             ),
           ],

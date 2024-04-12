@@ -90,7 +90,6 @@ class _LoginPageState extends State<LoginPage>
                       suffixIcon: IconButton(
                         icon: Icon(Icons.visibility),
                         onPressed: () {
-                          // Implement toggle password visibility logic
                         },
                       ),
                     ),
@@ -101,7 +100,6 @@ class _LoginPageState extends State<LoginPage>
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
                       onTap: () {
-                        // Implement forgot password logic or navigate to a link
                       },
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -116,7 +114,6 @@ class _LoginPageState extends State<LoginPage>
                     ),
                   ),
                   SizedBox(height: 16.0),
-                  // Login Button with corner radius and custom color
                   ElevatedButton(
                     onPressed: () async {
                       LoginResult result = await loginAndGetAccessToken(context,

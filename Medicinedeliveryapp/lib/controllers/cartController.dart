@@ -18,7 +18,7 @@ Future<void> addToCart(
   };
 
   final body = jsonEncode({
-    'productID': productID, // Assuming the backend expects an 'orderId' field
+    'productID': productID,
     'quantity': quantity,
   });
 
@@ -31,7 +31,7 @@ Future<void> addToCart(
   if (response.statusCode == 200) {
     print("$productID added to cart");
   } else {
-    // Handle error scenario
+
     throw Exception('Failed add');
   }
 }
@@ -68,7 +68,7 @@ Future<List<Cart>> getCart(BuildContext context) async {
   final response = await http.get(Uri.parse(apiUrl), headers: headers);
 
   if (response.statusCode == 200) {
-    // Decode the JSON response into a List<dynamic>
+
     List jsonData = json.decode(response.body)['data'] as List;
     List<Cart> carts = jsonData
         .map<Cart>(

@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-// ignore: unnecessary_import
-import 'package:flutter/widgets.dart';
 import 'package:medicinedeliveryapp/models/authModel.dart';
 import 'package:medicinedeliveryapp/pages/patient/patient_prescription.dart';
 import 'package:medicinedeliveryapp/pages/patient/patient_store.dart';
@@ -43,7 +41,7 @@ class HomePage extends StatelessWidget {
     if (await canLaunchUrl(url)) {
       await launchUrl(
       url,
-      mode: LaunchMode.externalApplication, // Explicitly use an external application
+      mode: LaunchMode.externalApplication,
     );
     } else {
       throw 'Could not launch $url';
@@ -201,7 +199,7 @@ class HomePage extends StatelessWidget {
                                 '19.99',
                                 'assets/product1.jpg'),
                           ),
-                        ); // danata mekata damme
+                        ); // test
                       },
                       borderRadius: BorderRadius.circular(
                           10.0), // Adjust corner radius as needed
@@ -218,7 +216,7 @@ class HomePage extends StatelessWidget {
                             MaterialPageRoute(
                               builder: (context) => Itemsdesc('Sample Title',
                                   'This is a description.', '19.99', ''),
-                            )); // danata mekata damme
+                            )); // test
                       },
                       borderRadius: BorderRadius.circular(
                           10.0), // Adjust corner radius as needed
@@ -236,7 +234,7 @@ class HomePage extends StatelessWidget {
                             builder: (context) => Itemsdesc('Sample Title',
                                 'This is a description.', '19.99', ''),
                           ),
-                        ); // danata mekata damme
+                        ); //test
                       },
                       borderRadius: BorderRadius.circular(
                           10.0), // Adjust corner radius as needed
@@ -254,10 +252,10 @@ class HomePage extends StatelessWidget {
                             builder: (context) => Itemsdesc('Sample Title',
                                 'This is a description.', '19.99', ''),
                           ),
-                        ); // danata mekata damme
+                        ); //test
                       },
                       borderRadius: BorderRadius.circular(
-                          10.0), // Adjust corner radius as needed
+                          10.0), 
                       child: productCard(
                         title: 'Nad Injection',
                         imageUrl:
@@ -304,7 +302,7 @@ class HomePage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => Profile()),
-                ); // Handle settings button press
+                );
               },
             ),
           ],
