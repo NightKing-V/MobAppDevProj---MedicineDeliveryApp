@@ -163,6 +163,11 @@ class _RegisterPharmacyPageState extends State<RegisterPharmacyPage> {
                   ),
                 ElevatedButton(
                   onPressed: () {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Data added!'),
+                      ),
+                    );
                     if (_formKey.currentState!.validate()) {
                       _formKey.currentState!.save();
                     }
