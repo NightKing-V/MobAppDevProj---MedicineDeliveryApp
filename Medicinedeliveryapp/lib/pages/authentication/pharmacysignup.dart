@@ -25,7 +25,7 @@ class _RegisterPharmacyPageState extends State<RegisterPharmacyPage> {
       appBar: AppBar(
         title: Text(
           'Register Pharmacy',
-          style: TextStyle(color: Colors.white, fontSize: 20.0),
+          style: TextStyle(color: Colors.black, fontSize: 20.0),
         ),
         backgroundColor: customColor,
         iconTheme: IconThemeData(color: Colors.white),
@@ -39,16 +39,16 @@ class _RegisterPharmacyPageState extends State<RegisterPharmacyPage> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Align(
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Pharmacy Details',
-                    style: TextStyle(
-                      fontSize: 28.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
+                // Align(
+                //   alignment: Alignment.center,
+                //   child: Text(
+                //     'Pharmacy Details',
+                //     style: TextStyle(
+                //       fontSize: 28.0,
+                //       fontWeight: FontWeight.bold,
+                //     ),
+                //   ),
+                // ),
                 // Pharmacy Name Textfield
                 TextFormField(
                   decoration: InputDecoration(
@@ -173,7 +173,7 @@ class _RegisterPharmacyPageState extends State<RegisterPharmacyPage> {
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(30.0),
                     ),
-                    textStyle: TextStyle(color: Colors.white),
+                    textStyle: const TextStyle(color: Colors.white),
                   ),
                 ),
               ],

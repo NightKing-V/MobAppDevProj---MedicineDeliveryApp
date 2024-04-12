@@ -74,7 +74,7 @@ class _SignUpPageState extends State<SignUpPage>
           },
         ),
         backgroundColor: customColor,
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: IconThemeData(color: Colors.grey),
       ),
       body: Center(
         child: SingleChildScrollView(
