@@ -31,6 +31,30 @@ Future<List<Prescription>> getPrescriptions(BuildContext context) async {
   }
 }
 
+Future<List<Prescription>> getPrescriptionByPharmacy(
+    BuildContext context) async {
+  print("in");
+  final String apiUrl = API.API_URL + '/prescriptions/getPharmacy';
+  final String accessToken =
+      Provider.of<AuthModel>(context, listen: false).accessToken;
+
+  final headers = {
+    'Authorization': 'Bearer $accessToken',
+  };
+
+  final response = await http.get(Uri.parse(apiUrl), headers: headers);
+  if (response.statusCode == 200) {
+    List jsonData = json.decode(response.body)['data'] as List;
+    List<Prescription> prescription = jsonData
+        .map<Prescription>((jsonItem) =>
+            Prescription.fromJson(jsonItem as Map<String, dynamic>))
+        .toList();
+    return prescription;
+  } else {
+    throw Exception('Failed to fetch prescription data');
+  }
+}
+
 Future<List<Prescription>> getPrescriptionsByUser(BuildContext context) async {
   final String apiUrl = API.API_URL + '/prescriptions/get';
   final String accessToken =
@@ -128,7 +152,6 @@ Future<void> acceptPrescription(BuildContext context, String id) async {
     'Content-Type': 'application/json',
     'Authorization': 'Bearer $accessToken',
   };
-
 
   try {
     final response = await http.post(

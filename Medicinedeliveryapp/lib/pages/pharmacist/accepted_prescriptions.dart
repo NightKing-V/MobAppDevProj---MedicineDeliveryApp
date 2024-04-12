@@ -28,12 +28,12 @@ class _AcceptedPrescriptionsState extends State<AcceptedPrescriptions> {
   @override
   void initState() {
     super.initState();
-    futureCart = getPrescriptions(context) as Future<List<Prescription>>;
+    futureCart = getPrescriptionByPharmacy(context) as Future<List<Prescription>>;
   }
 
   Future<void> deleteItem(String itemId) async {
     setState(() {
-      futureCart = getPrescriptions(context) as Future<List<Prescription>>;
+      futureCart = getPrescriptionByPharmacy(context) as Future<List<Prescription>>;
     });
   }
 
