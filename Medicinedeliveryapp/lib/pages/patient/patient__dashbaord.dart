@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 // ignore: unnecessary_import
 import 'package:flutter/widgets.dart';
 import 'package:medicinedeliveryapp/models/authModel.dart';
+import 'package:medicinedeliveryapp/pages/patient/patient_prescription.dart';
 import 'package:medicinedeliveryapp/pages/patient/patient_store.dart';
 import 'package:medicinedeliveryapp/pages/patient/profile.dart';
 import 'package:medicinedeliveryapp/pages/patient/itemsdesc.dart';
@@ -103,7 +104,13 @@ class HomePage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => PrescriptionPage(),
+                            )); 
+                    },
                     style: ElevatedButton.styleFrom(
                       foregroundColor: const Color(0xFF199A8E),
                       backgroundColor: Colors.white,

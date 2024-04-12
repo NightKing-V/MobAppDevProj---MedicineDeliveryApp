@@ -49,7 +49,11 @@ class _PrescriptionsPageState extends State<PrescriptionsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Available Prescriptions"),
+        centerTitle: true,
+        title: Text(
+          "Available Prescriptions",
+          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        ),
       ),
       body: Center(
         child: FutureBuilder<List<Prescription>>(
@@ -58,9 +62,9 @@ class _PrescriptionsPageState extends State<PrescriptionsPage> {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const CircularProgressIndicator();
             } else if (snapshot.hasData) {
-              print("has data in heeere");
-              // Flatten all items from all carts into a single list.
-              final allItems = snapshot.data!;
+              final allItems = snapshot.data!
+                        .where((item) => item.pickedup == "Awaiting to Pickup")
+                        .toList();
 
               return ListView.builder(
                 itemCount: allItems.length,
@@ -106,9 +110,13 @@ class _PrescriptionsPageState extends State<PrescriptionsPage> {
                                   style: TextStyle(fontSize: 12),
                                 ),
                                 Text(
-                                  "Prescription Owner: ${item.userId.firstName} ${item.userId.lastName}",
+                                  "Owner: ${item.userId.firstName} ${item.userId.lastName}",
                                   style: TextStyle(fontSize: 12),
-                                )
+                                ),
+                                Text(
+                                  "Date: ${item.createdAt.year}/${item.createdAt.month}/${item.createdAt.day}",
+                                  style: TextStyle(fontSize: 12),
+                                ),
                               ],
                             ),
                           ),

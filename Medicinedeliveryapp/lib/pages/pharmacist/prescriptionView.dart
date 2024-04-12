@@ -127,7 +127,7 @@ class _PrescriptionViewState extends State<PrescriptionView> {
       ),
       ElevatedButton.icon(
         onPressed: () {
-          // Implement what happens when the action is canceled
+          Navigator.pop(context);
           print("Cancel Action");
         },
         icon: Icon(Icons.cancel, color: Colors.white), // X mark icon

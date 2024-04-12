@@ -182,7 +182,7 @@ class PharmacistDashboard extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 20, right: 20),
                         child: CardButton(
-                          title: "Patient Chats",
+                          title: "Prescriptions",
                           icon: Icons.chat, // Use Icon widget directly
                           color: Colors.pink,
                           onPressed: () {
