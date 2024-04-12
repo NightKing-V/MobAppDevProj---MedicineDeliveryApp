@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:medicinedeliveryapp/controllers/prescriptionController.dart';
+import 'package:medicinedeliveryapp/pages/pharmacist/prescriptions.dart';
 
 void main() {
   runApp(MyApp());
@@ -46,6 +48,24 @@ class PrescriptionView extends StatefulWidget {
 }
 
 class _PrescriptionViewState extends State<PrescriptionView> {
+  Future<void> accpetPrescription(String id) async {
+    try {
+      await acceptPrescription(context, id);
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (context) => PrescriptionsPage()),
+      );
+    } catch (e) {
+      // Handle any errors here, e.g., show an error message
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text("Failed to update prescription: $e"),
+          backgroundColor: Colors.red,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -110,35 +130,37 @@ class _PrescriptionViewState extends State<PrescriptionView> {
                   style: TextStyle(fontSize: 14)),
             ),
             Padding(
-  padding: const EdgeInsets.only(top: 30, bottom: 30),
-  child: Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    children: [
-      ElevatedButton.icon(
-        onPressed: () {
-          print("Delivery Confirmed");
-        },
-        icon: Icon(Icons.local_shipping, color: Colors.white), 
-        label: Text("Confirm"),
-        style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white, backgroundColor: Colors.green, 
-        ),
-      ),
-      ElevatedButton.icon(
-        onPressed: () {
-          Navigator.pop(context);
-          print("Cancel Action");
-        },
-        icon: Icon(Icons.cancel, color: Colors.white), 
-        label: Text("Cancel"),
-        style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white, backgroundColor: Colors.red,
-        ),
-      ),
-    ],
-  ),
-)
-
+              padding: const EdgeInsets.only(top: 30, bottom: 30),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton.icon(
+                    onPressed: () async{
+                      await accpetPrescription(widget.id);
+                      print("Delivery Confirmed");
+                    },
+                    icon: Icon(Icons.local_shipping, color: Colors.white),
+                    label: Text("Confirm"),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.green,
+                    ),
+                  ),
+                  ElevatedButton.icon(
+                    onPressed: () {
+                      Navigator.pop(context);
+                      print("Cancel Action");
+                    },
+                    icon: Icon(Icons.cancel, color: Colors.white),
+                    label: Text("Cancel"),
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: Colors.red,
+                    ),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),

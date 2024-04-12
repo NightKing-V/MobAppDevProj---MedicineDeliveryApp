@@ -118,3 +118,33 @@ Future<String> uploadPrescription({
     return "failed";
   }
 }
+
+Future<void> acceptPrescription(BuildContext context, String id) async {
+  final String apiUrl = API.API_URL + '/prescriptions/status/$id';
+  final String accessToken =
+      Provider.of<AuthModel>(context, listen: false).accessToken;
+
+  final headers = {
+    'Content-Type': 'application/json',
+    'Authorization': 'Bearer $accessToken',
+  };
+
+
+  try {
+    final response = await http.post(
+      Uri.parse(apiUrl),
+      headers: headers,
+    );
+
+    if (response.statusCode == 200) {
+      print("order state changed");
+    } else {
+      print('Failed to change order state: Status Code ${response.statusCode}');
+      print('Response Body: ${response.body}');
+      throw Exception('Failed to fetch data: ${response.body}');
+    }
+  } catch (e) {
+    print('An error occurred: $e');
+    throw Exception('An error occurred when trying to change the order state');
+  }
+}
