@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import '../splash/tncsplash.dart';
+import 'pharmacysignup.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -18,6 +19,7 @@ class _SignUpPageState extends State<SignUpPage>
   int _selectedYear = DateTime.now().year;
   int _selectedMonth = DateTime.now().month;
   int _selectedDay = DateTime.now().day;
+  String _selectedUserType = "Patient";
 
   @override
   void initState() {
@@ -38,6 +40,25 @@ class _SignUpPageState extends State<SignUpPage>
 
     // Start the animation
     _controller.forward();
+  }
+
+  void handleSignUp() {
+    if (_selectedUserType == "Pharmacy") {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => RegisterPharmacyPage()),
+      );
+    } else {
+      showDataAddedSnackbar();
+    }
+  }
+
+  void showDataAddedSnackbar() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text('Data added!'),
+      ),
+    );
   }
 
   @override
@@ -74,6 +95,25 @@ class _SignUpPageState extends State<SignUpPage>
                         fontWeight: FontWeight.bold,
                       ),
                     ),
+                  ),
+                  SizedBox(height: 40.0),
+                  DropdownButtonFormField<String>(
+                    value: _selectedUserType,
+                    items: [
+                      DropdownMenuItem<String>(
+                        value: "Patient",
+                        child: Text('Patient'),
+                      ),
+                      DropdownMenuItem<String>(
+                        value: "Pharmacy",
+                        child: Text('Pharmacy'),
+                      ),
+                    ],
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedUserType = value!;
+                      });
+                    },
                   ),
                   SizedBox(height: 40.0),
                   TextField(
@@ -245,16 +285,7 @@ class _SignUpPageState extends State<SignUpPage>
                   ),
                   SizedBox(height: 16.0),
                   ElevatedButton(
-                    onPressed: () {
-                      // Implement Sign Up logic
-                      // You can check _agreedToTerms here if needed
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => tncsplash(),
-                        ),
-                      );
-                    },
+                    onPressed: handleSignUp,
                     style: ElevatedButton.styleFrom(
                       backgroundColor: customColor,
                       shape: RoundedRectangleBorder(
